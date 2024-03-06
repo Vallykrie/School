@@ -1,20 +1,24 @@
-import java.util.Scanner;
+import java.io.*;
+import java.util.*;
+import java.util.LinkedList;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
 
-public class nathan_051_2_1 {
+public class nathan_051_2_1copy {
     public static void main(String[] args) {
-        Scanner than = new Scanner(System.in);
+        // Scanner than = new Scanner(System.in);
         // int loop = than.nextInt();
         // than.nextLine();
-        int numCommands = than.nextInt();
         // LinkedList list = new LinkedList();
-        than.nextLine();
         // list.makeEmpty();
-        SinglyLinkedList sll = new SinglyLinkedList();
+        Scanner scanner = new Scanner(System.in);
+        int jumlahPerintah = scanner.nextInt();
+        scanner.nextLine();
+
+        SLL sll = new SLL();
         // for (int i = 0; i < loop; i++) {
-            for (int i = 0; i < numCommands; i++) {
-                String command = than.nextLine();
-                String[] parts = command.split(" ");
-            //     String perintah = than.nextLine();
+        //     String perintah = than.nextLine();
         //     String perintah1 = perintah.substring(0, perintah.indexOf(" "));
         //     int simpan = perintah.indexOf(" ");
         //     perintah = perintah.substring(simpan + 1, perintah.length());
@@ -52,123 +56,100 @@ public class nathan_051_2_1 {
         //     // System.out.println(perintah1);
 
         // }
-
-            switch (parts[0]) {
-
+        for (int i = 0; i < jumlahPerintah; i++) {
+            String[] perintah = scanner.nextLine().split(" ");
+            switch (perintah[0]) {
                 case "TAMBAH":
-                    if (parts[1].equals("AWAL")) {
-                        int data = Integer.parseInt(parts[2]);
-                        sll.insertAtBeginning(data);
-                    } else if (parts[1].equals("AKHIR")) {
-                        int data = Integer.parseInt(parts[2]);
-                        sll.insertAtEnd(data);
+                    int data = Integer.parseInt(perintah[2]);
+                    if (perintah[1].equals("AWAL")) {
+                        sll.tambahAwal(data);
+                    } else if (perintah[1].equals("AKHIR")) {
+                        sll.tambahAkhir(data);
                     }
                     break;
                 case "HAPUS":
-                    if (parts[1].equals("AWAL")) {
-                        sll.deleteAtBeginning();
-                    } else if (parts[1].equals("AKHIR")) {
-                        sll.deleteAtEnd();
+                    if (perintah[1].equals("AWAL")) {
+                        sll.hapusAwal();
+                    } else if (perintah[1].equals("AKHIR")) {
+                        sll.hapusAkhir();
                     }
                     break;
                 case "ADA":
-                    int data = Integer.parseInt(parts[2]);
-                    if (sll.searchData(data)) {
-                        System.out.println("ADA");
-                    } else {
-                        System.out.println("MAAF YAH KAMU SEDANG TIDAK BERUNTUNG, TERNYATA DATANYA GAK ADA");
-                    }
+                    int searchData = Integer.parseInt(perintah[2]);
+                    System.out.println(sll.ada(searchData) ? "ADA" : "MAAF YAH KAMU SEDANG TIDAK BERUNTUNG, TERNYATA DATANYA GAK ADA");
                     break;
                 case "LIHAT":
-                    sll.printLinkedList();
+                    sll.lihatDong();
                     break;
                 case "BERAPA":
-                    System.out.println(sll.countData());
+                    System.out.println(sll.berapaTuh());
                     break;
                 default:
                     break;
             }
         }
-
-        than.close();
+        scanner.close();
     }
 }
 
-class Node {
-    int data;
-    Node next;
+class SLL {
 
-    public Node(int data) {
-        this.data = data;
-        this.next = null;
-    }
-}
+    Node head, tail;
+    int size;
 
-class SinglyLinkedList {
-    private Node head;
-
-    public SinglyLinkedList() {
-        this.head = null;
+    public int size() {
+        return size;
     }
 
-    public void insertAtBeginning(int data) {
+    public boolean isEmpty() {
+        return size == 0;
+    }
+    public void tambahAkhir(int data) {
         Node newNode = new Node(data);
-        if (head == null) {
-            head = newNode;
+        if (isEmpty()) {
+            head = tail = newNode;
+        } else {
+            tail.next = newNode;
+            tail = newNode;
+        }
+        size++;
+    }
+    public void hapusAwal() {
+        if (!isEmpty()) {
+            head = head.next;
+            size--;
+            if (isEmpty()) {
+                tail = null;
+            }
+        }
+    }
+    public void tambahAwal(int data) {
+        Node newNode = new Node(data);
+        if (isEmpty()) {
+            head = tail = newNode;
         } else {
             newNode.next = head;
             head = newNode;
         }
+        size++;
     }
-
-    public void insertAtEnd(int data) {
-        Node newNode = new Node(data);
-        if (head == null) {
-            head = newNode;
-        } else {
-            Node current = head;
-            while (current.next != null) {
-                current = current.next;
+    public void hapusAkhir() {
+        if (!isEmpty()) {
+            if (size == 1) {
+                head = tail = null;
+            } else {
+                Node current = head;
+                while (current.next != tail) {
+                    current = current.next;
+                }
+                tail = current;
+                tail.next = null;
             }
-            current.next = newNode;
+            size--;
         }
     }
-
-    public void deleteAtBeginning() {
-        if (head == null) {
-            System.out.println("Data Linked List kosong");
-        } else {
-            head = head.next;
-        }
-    }
-
-    public void deleteAtEnd() {
-        if (head == null) {
-            System.out.println("Data Linked List kosong");
-        } else if (head.next == null) {
-            head = null;
-        } else {
-            Node current = head;
-            while (current.next.next != null) {
-                current = current.next;
-            }
-            current.next = null;
-        }
-    }
-
-    public boolean searchData(int data) {
-        Node current = head;
-        while (current != null) {
-            if (current.data == data) {
-                return true;
-            }
-            current = current.next;
-        }
-        return false;
-    }
-
-    public void printLinkedList() {
-        if (head == null) {
+    public void lihatDong() {
+        if (isEmpty()) {
             System.out.println("Data Linked List kosong");
         } else {
             Node current = head;
@@ -180,13 +161,26 @@ class SinglyLinkedList {
         }
     }
 
-    public int countData() {
-        int count = 0;
+    public int berapaTuh() {
+        return size;
+    }
+    public boolean ada(int data) {
         Node current = head;
         while (current != null) {
-            count++;
+            if (current.data == data) {
+                return true;
+            }
             current = current.next;
         }
-        return count;
+        return false;
+    }
+}
+class Node {
+    int data;
+    Node next;
+
+    public Node(int data) {
+        this.data = data;
+        this.next = null;
     }
 }
