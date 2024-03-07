@@ -44,43 +44,6 @@ public class nathan_051_2_1 {
                 default:
                     break;
             }
-
-            // String perintah1 = perintah.substring(0, perintah.indexOf(" "));
-            // int simpan = perintah.indexOf(" ");
-            // perintah = perintah.substring(simpan + 1, perintah.length());
-            // String perintah2 = "";
-            // int data = 0;
-            // if (perintah1.equals("TAMBAH") || perintah1.equals("TAMBAH ")) {
-            //     // pakek!!!!!
-            //     perintah2 = perintah.substring(0, perintah.indexOf(" "));
-            //     data = Integer.parseInt(perintah.substring(perintah.indexOf(" ") + 1, perintah.length()));
-            //     if (perintah2.equals("AWAL") || perintah2.equals("AWAL ") ) {
-            //         list.prepend(data);
-            //     } else if (perintah2.equals("AKHIR" ) || perintah2.equals("AKHIR ")) {
-            //         list.append(data);
-            //     }
-
-            // } else if (perintah1.equals("HAPUS")  || perintah1.equals("HAPUS ")) {
-            //     perintah2 = perintah.substring(0, perintah.length());
-            //         if (perintah2.equals("AWAL") || perintah2.equals("AWAL ")) {
-            //             list.removeFirst();
-            //         } else if (perintah2.equals("AKHIR") || perintah2.equals("AKHIR ")) {
-            //             list.removeLast();
-                    
-            //     }
-            // } else if (perintah1.equals("LIHAT") || perintah1.equals("LIHAT ")) {
-            //         list.printList();
-            // } else if (perintah1.equals("ADA") || perintah1.equals("ADA ")) {
-            //     // pakek!!!!!
-            //     perintah2 = perintah.substring(0, perintah.indexOf(" "));
-            //     data = Integer.parseInt(perintah.substring(perintah.indexOf(" ") + 1, perintah.length()));
-            //     list.search(data);
-            // } else if (perintah1.equals("BERAPA") || perintah1.equals("BERAPA ")) {
-            //         list.getLength();
-                
-            // }
-            // System.out.println(perintah1);
-
         }
     }
 

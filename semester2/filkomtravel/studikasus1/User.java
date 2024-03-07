@@ -1,4 +1,5 @@
 package filkomtravel.studikasus1;
+import java.util.LinkedList;
 
 public class User {
     private String username, password, email, namaLengkap;
@@ -10,22 +11,13 @@ public class User {
         this.namaLengkap = namaLengkap;
     }
 
-    public boolean login(String username, String password) {
-        if (this.username.equals(username) && this.password.equals(password)) {
-            System.out.println("Login berhasil");
-            return true;
-        } else {
-            System.out.println("Login gagal");
-            return false;
+    public static boolean login(String username, String password, LinkedList<User> userList) {
+        for (User user : userList) {
+            if (user.getUsername().equals(username) && user.getPassword().equals(password)) {
+                return true;
+            }
         }
-    }
-
-    public void register(String username, String password, String email, String namaLengkap) {
-        this.username = username;
-        this.password = password;
-        this.email = email;
-        this.namaLengkap = namaLengkap;
-        System.out.println("Register berhasil");
+        return false;
     }
 
     public void setUsername(String username) {
@@ -81,10 +73,10 @@ public class User {
     }
 
     public void viewProfile() {
+        System.out.println("Nama Lengkap: " + namaLengkap);
         System.out.println("Username: " + username);
         System.out.println("Password: " + password);
         System.out.println("Email: " + email);
-        System.out.println("Nama Lengkap: " + namaLengkap);
     }
 
     
