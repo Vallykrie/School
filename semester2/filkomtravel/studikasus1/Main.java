@@ -1,7 +1,5 @@
 package filkomtravel.studikasus1;
 
-import java.text.DecimalFormat;
-import java.text.DecimalFormatSymbols;
 import java.util.Scanner;
 import java.util.LinkedList;
 
@@ -36,7 +34,7 @@ public class Main {
             System.out.println();
             System.out.println("1. Login");
             System.out.println("2. Register");
-            System.out.println("3. Exit");
+            System.out.println("3. Keluar");
             System.out.println();
             System.out.println("Ketik 1, 2, atau 3");
             System.out.print("-> ");
@@ -52,6 +50,7 @@ public class Main {
                     username = than.nextLine();
                     System.out.print("Password: ");
                     password = than.nextLine();
+                    System.out.println();
                     System.out.println(divider1);
                     if (User.login(username, password, userList)) {
                         System.out.println("Login Berhasil");
@@ -96,7 +95,7 @@ public class Main {
                 System.out.println("1. Van");
                 System.out.println("2. Mobil");
                 System.out.println("3. Motor");
-                System.out.println("4. Exit");
+                System.out.println("4. Keluar");
                 System.out.println();
                 System.out.println("Ketik 1, 2, 3, atau 4");
                 System.out.print("-> ");
@@ -121,7 +120,6 @@ public class Main {
                             String waktu = than.nextLine();
                             String[] tanggalSewa = tanggal.split("/");
                             String[] jamSewa = waktu.split(":");
-                            System.out.println(divider2);
 
                             // Nota
                             Nota nota = new Nota(tanggalSewa, jam, van1.getPrice() * jam, jamSewa);
@@ -147,7 +145,6 @@ public class Main {
                             String waktu = than.nextLine();
                             String[] tanggalSewa = tanggal.split("/");
                             String[] jamSewa = waktu.split(":");
-                            System.out.println(divider2);
 
                             // Nota
                             Nota nota = new Nota(tanggalSewa, jam, mobil1.getPrice() * jam, jamSewa);
@@ -172,7 +169,6 @@ public class Main {
                             String waktu = than.nextLine();
                             String[] tanggalSewa = tanggal.split("/");
                             String[] jamSewa = waktu.split(":");
-                            System.out.println(divider2);
 
                             // Nota
                             Nota nota = new Nota(tanggalSewa, jam, motor1.getPrice() * jam, jamSewa);
@@ -192,6 +188,6 @@ public class Main {
             }
 
         }
-
+        than.close();
     }
 }

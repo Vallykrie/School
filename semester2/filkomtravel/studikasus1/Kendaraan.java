@@ -23,11 +23,12 @@ public class Kendaraan {
         symbols.setDecimalSeparator(',');
         DecimalFormat df = new DecimalFormat("Rp #,###.00", symbols);
 
-        System.out.println("Model: " + model);
-        System.out.println("Color: " + color);
-        System.out.println("Number Plate: " + numberPlate);
-        System.out.println("Capacity: " + capacity);
-        System.out.println("Price: " + df.format(price));
+        System.out.println("Model\t\t\t: " + model);
+        System.out.println("Warna\t\t\t: " + color);
+        System.out.println("Plat Nomor\t\t: " + numberPlate);
+        System.out.println("Kapasitas penumpang\t: " + capacity);
+        System.out.println("Harga\t\t\t: " + df.format(price) + "/jam");
+        System.out.println("-".repeat(50));
     }
 
     public String getModel() {
