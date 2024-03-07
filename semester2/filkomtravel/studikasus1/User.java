@@ -1,4 +1,4 @@
-package semester2.filkomtravel;
+package filkomtravel.studikasus1;
 
 public class User {
     private String username, password, email, namaLengkap;

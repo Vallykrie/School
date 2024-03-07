@@ -1,5 +1,5 @@
-package semester2.filkomtravel;
+package filkomtravel.studikasus1;
 
-public class Mobil {
+public class Mobil extends Kendaraan{
     
 }

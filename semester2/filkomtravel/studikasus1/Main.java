@@ -1,9 +1,8 @@
-package semester2.filkomtravel.studikasus1;
+package filkomtravel.studikasus1;
 
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.util.Scanner;
-import semester2.filkomtravel.User;
 
 public class Main {
     public static void main(String[] args) {
