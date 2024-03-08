@@ -3,20 +3,34 @@ package filkomtravel.studikasus1;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 
-public class Nota {
+/**
+ * The Receipt class represents a receipt for a rental transaction.
+ * It contains information about the rental date, duration, price, and return date.
+ */
+public class Receipt {
 
     String[] tanggalSewa, jamSewa;
     int jam;
     double harga;
 
-
-    Nota(String[] tanggalSewa, int jam, double harga, String[] jamSewa) {
+    /**
+     * Constructs a Receipt object with the specified rental information.
+     * 
+     * @param tanggalSewa the rental date in the format [year, month, day]
+     * @param jam the duration of the rental in hours
+     * @param harga the price of the rental
+     * @param jamSewa the rental time in the format [hour, minute]
+     */
+    Receipt(String[] tanggalSewa, int jam, double harga, String[] jamSewa) {
         this.tanggalSewa = tanggalSewa;
         this.jam = jam;
         this.harga = harga;
         this.jamSewa = jamSewa;
     }
 
+    /**
+     * Prints the details of the rental transaction, including rental date, duration, return date, and price.
+     */
     public void print() {
         // Price Formats
         DecimalFormatSymbols symbols = new DecimalFormatSymbols();

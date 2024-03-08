@@ -20,6 +20,39 @@ public class User {
         return false;
     }
 
+    public static int get (String username, LinkedList<User> userList) {
+        for (int i = 0; i < userList.size(); i++) {
+            if (userList.get(i).getUsername().equals(username)) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    public void editProfile(String username, String password, String email, String namaLengkap) {
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.namaLengkap = namaLengkap;
+        System.out.println("Edit profile berhasil");
+    }
+
+    public void deleteProfile() {
+        this.username = null;
+        this.password = null;
+        this.email = null;
+        this.namaLengkap = null;
+        System.out.println("Delete profile berhasil");
+    }
+
+    public void viewProfile() {
+        System.out.println("Nama Lengkap: " + namaLengkap);
+        System.out.println("Username: " + username);
+        System.out.println("Password: " + password);
+        System.out.println("Email: " + email);
+    }
+
+
     public void setUsername(String username) {
         this.username = username;
     }
@@ -54,32 +87,6 @@ public class User {
 
     public void logout() {
         System.out.println("Logout berhasil");
-    }
+    }    
 
-    public void editProfile(String username, String password, String email, String namaLengkap) {
-        this.username = username;
-        this.password = password;
-        this.email = email;
-        this.namaLengkap = namaLengkap;
-        System.out.println("Edit profile berhasil");
-    }
-
-    public void deleteProfile() {
-        this.username = null;
-        this.password = null;
-        this.email = null;
-        this.namaLengkap = null;
-        System.out.println("Delete profile berhasil");
-    }
-
-    public void viewProfile() {
-        System.out.println("Nama Lengkap: " + namaLengkap);
-        System.out.println("Username: " + username);
-        System.out.println("Password: " + password);
-        System.out.println("Email: " + email);
-    }
-
-    
-
-    
 }
