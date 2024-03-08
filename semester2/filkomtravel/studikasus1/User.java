@@ -3,6 +3,8 @@ import java.util.LinkedList;
 
 public class User {
     private String username, password, email, namaLengkap;
+    private String status = "non-member";
+    private boolean isMember = false;
 
     public User(String username, String password, String email, String namaLengkap) {
         this.username = username;
@@ -46,10 +48,10 @@ public class User {
     }
 
     public void viewProfile() {
-        System.out.println("Nama Lengkap: " + namaLengkap);
-        System.out.println("Username: " + username);
-        System.out.println("Password: " + password);
-        System.out.println("Email: " + email);
+        System.out.println("Nama Lengkap\t: " + namaLengkap);
+        System.out.println("Username\t: " + username);
+        System.out.println("Email\t\t: " + email);
+        System.out.println("Status\t\t: " + status);
     }
 
 
@@ -85,8 +87,14 @@ public class User {
         return namaLengkap;
     }
 
-    public void logout() {
-        System.out.println("Logout berhasil");
-    }    
+    public String getStatus() {
+        return status;
+    }
+
+    public boolean isMember() {
+        return isMember;
+    }
+
+
 
 }
