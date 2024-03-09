@@ -8,7 +8,7 @@ public class Solution {
         int m = scanner.nextInt();
         scanner.nextLine();
 
-        LinkedList listKTM = new LinkedList<>();
+        LinkedList listKTM = new LinkedList();
 
         for (int i = 0; i < n; i++) {
             String input = scanner.nextLine();
