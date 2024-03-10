@@ -9,9 +9,9 @@ import java.text.DecimalFormatSymbols;
  */
 public class Receipt {
 
-    String[] tanggalSewa, jamSewa;
-    int jam;
-    double harga;
+    private String[] tanggalSewa, jamSewa;
+    private int jam;
+    private double harga;
 
     /**
      * Constructs a Receipt object with the specified rental information.
