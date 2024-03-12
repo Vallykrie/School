@@ -28,6 +28,9 @@ public class Mobil {
     private double rubahKecepatan(int kecepatan){
         return kecepatan*1000/3600;
     }
+    public void hitungJarak(int kecepatan, int waktu){
+        double jarak = kecepatan*waktu;
+    }
     public void displayMessage() {
         System.out.println("Mobil anda adalah bermerek " + manufaktur);
         System.out.println("mempunyai nomor plat " + noPlat);
