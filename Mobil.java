@@ -3,6 +3,7 @@ public class Mobil {
     private String warna;
     private String manufaktur;
     private int kecepatan;
+    private double waktu;
 
     public void setNoPlat(String s) {
         noPlat = s;
@@ -15,6 +16,17 @@ public class Mobil {
     }
     public void setKecepatan(int i) {
         kecepatan = i;
+        double kecepatanMs = rubahKecepatan(kecepatan);
+    }
+    public void setWaktu(double d) {
+        waktu = d;
+        double sekon = rubahSekon(waktu);
+    }
+    private double rubahSekon(double waktu){
+        return waktu*3600;
+    }
+    private double rubahKecepatan(int kecepatan){
+        return kecepatan*1000/3600;
     }
     public void displayMessage() {
         System.out.println("Mobil anda adalah bermerek " + manufaktur);
