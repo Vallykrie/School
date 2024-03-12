@@ -17,9 +17,9 @@ public class Mobil {
         kecepatan = i;
     }
     public void displayMessage() {
-        System.out.println("Mobil anda adalah bermerek" + manufaktur);
+        System.out.println("Mobil anda adalah bermerek " + manufaktur);
         System.out.println("mempunyai nomor plat " + noPlat);
         System.out.println("serta memililki warna " + warna);
-        System.out.println("dan mampu menempuh kecepatan" + kecepatan);
+        System.out.println("dan mampu menempuh kecepatan " + kecepatan);
     }
 }
