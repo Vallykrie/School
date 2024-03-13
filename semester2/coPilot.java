@@ -8,48 +8,54 @@ public class coPilot {
         scanner.nextLine();
 
         DLL dll = new DLL();
+        String barang = "";
 
         for (int i = 0; i < numCommands; i++) {
             String command = scanner.nextLine();
 
-            if (command.equals("TAMBAH")) {
-                String barang = scanner.nextLine();
-                int harga = scanner.nextInt();
-                scanner.nextLine();
+            switch (command) {
+                case "TAMBAH":
+                    barang = scanner.nextLine();
+                    int harga = scanner.nextInt();
+                    scanner.nextLine();
 
-                dll.tambah(barang, harga);
-                System.out.println(barang + " berhasil ditambah");
-            } else if (command.equals("HAPUS")) {
-                String barang = scanner.nextLine();
+                    dll.tambah(barang, harga);
+                    System.out.println(barang + " berhasil ditambah");
+                    break;
+                case "HAPUS":
+                    barang = scanner.nextLine();
 
-                if (dll.hapus(barang)) {
-                    System.out.println(barang + " berhasil dihapus");
-                } else {
-                    System.out.println("Tidak dapat menghapus, barang tidak ditemukan");
-                }
-            } else if (command.equals("CARI")) {
-                String barang = scanner.nextLine();
-                NodeDLL node = dll.cari(barang);
+                    if (dll.hapus(barang)) {
+                        System.out.println(barang + " berhasil dihapus");
+                    } else {
+                        System.out.println("Tidak dapat menghapus, barang tidak ditemukan");
+                    }
+                    break;
+                case "CARI":
+                    barang = scanner.nextLine();
+                    NodeDLL node = dll.cari(barang);
 
-                if (node != null) {
-                    System.out.println("Barang = " + node.barang + " Harga = " + node.harga);
-                } else {
-                    System.out.println("Barang tidak ditemukan");
-                }
-            } else if (command.equals("HITUNG")) {
-                int total = dll.hitung();
+                    if (node != null) {
+                        System.out.println("Barang = " + node.barang + " \nHarga = " + node.harga);
+                    } else {
+                        System.out.println("Barang tidak ditemukan");
+                    }
+                    break;
+                case "HITUNG":
+                    int total = dll.hitung();
 
-                if (total != 0) {
-                    System.out.println("Total = " + total);
-                } else {
-                    System.out.println("Tidak ada transaksi yang sedang dilakukan");
-                }
-            } else if (command.equals("CETAK")) {
-                dll.cetak();
+                    if (total != 0) {
+                        System.out.println("Total = " + total);
+                    } else {
+                        System.out.println("Tidak ada transaksi yang sedang dilakukan");
+                    }
+                    break;
+                case "CETAK":
+                    dll.cetak();
+                    break;
             }
+            System.out.println();
         }
-
-        scanner.close();
     }
 }
 

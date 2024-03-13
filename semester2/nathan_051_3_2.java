@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class test {
+public class nathan_051_3_2 {
     public static void main(String[] args) {
         Scanner than = new Scanner(System.in);
 
@@ -227,7 +227,7 @@ class DLL {
 
         for (int i = 0; i < n; i++) {
             if (temp == null) {
-                break;
+                return sum;
             }
             sum += temp.harga;
             temp = temp.next;

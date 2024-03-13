@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class test2 {
+public class nathan_051_3_1 {
     public static void main(String[] args) {
         Scanner than = new Scanner(System.in);
         CDLL cdll = new CDLL();
