@@ -17,7 +17,11 @@ public class nathan_051_3_2 {
                 case "TAMBAH":
                     namaBarang = than.nextLine();
                     hargaBarang = than.nextInt();
-                    than.nextLine();
+                    if (i == loop - 1) {
+
+                    } else {
+                        than.nextLine();
+                    }
 
                     dll.addFirst(namaBarang, hargaBarang);
                     System.out.println(namaBarang + " berhasil ditambah");
@@ -171,6 +175,10 @@ class DLL {
     public void search(String barang) {
         NodeDLL pointer = head;
         boolean found = false;
+        if (pointer == null) {
+            System.out.println("Barang tidak ditemukan");
+            return;
+        }
         while (pointer != null) {
             if (pointer.barang.equals(barang)) {
                 System.out.println("Barang = " + pointer.barang + " \nHarga = " + pointer.harga);
@@ -224,13 +232,13 @@ class DLL {
         int sum = 0;
         NodeDLL temp = head;
         int n = this.size;
-
-        for (int i = 0; i < n; i++) {
-            if (temp == null) {
-                return sum;
+        if (temp == null) {
+            return sum;
+        } else {
+            for (int i = 0; i < n; i++) {
+                sum += temp.harga;
+                temp = temp.next;
             }
-            sum += temp.harga;
-            temp = temp.next;
         }
 
         return sum;
