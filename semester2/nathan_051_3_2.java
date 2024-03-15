@@ -5,7 +5,7 @@ public class nathan_051_3_2 {
         Scanner than = new Scanner(System.in);
 
         String namaBarang = "";
-        int hargaBarang = 0;
+        // int hargaBarang = 0;
 
         DLL dll = new DLL();
         int loop = than.nextInt();
@@ -16,14 +16,14 @@ public class nathan_051_3_2 {
             switch (perintah) {
                 case "TAMBAH":
                     namaBarang = than.nextLine();
-                    hargaBarang = than.nextInt();
+                    int hargaBarang = than.nextInt();
                     if (i == loop - 1) {
 
                     } else {
                         than.nextLine();
                     }
 
-                    dll.addFirst(namaBarang, hargaBarang);
+                    dll.addLast(namaBarang, hargaBarang);
                     System.out.println(namaBarang + " berhasil ditambah");
 
                     break;
@@ -39,7 +39,13 @@ public class nathan_051_3_2 {
                     break;
                 case "CARI":
                     namaBarang = than.nextLine();
-                    dll.search(namaBarang);
+                    NodeDLL node = dll.search(namaBarang);
+
+                    if (node != null) {
+                        System.out.println("Barang = " + node.barang + " \nHarga = " + node.harga);
+                    } else {
+                        System.out.println("Barang tidak ditemukan");
+                    }
 
                     break;
                 case "HITUNG":
@@ -53,7 +59,7 @@ public class nathan_051_3_2 {
 
                     break;
                 case "CETAK":
-                    dll.printToLast();
+                    dll.printToFirst();
                     break;
 
                 default:
@@ -105,17 +111,17 @@ class DLL {
         size++;
     }
 
-    // public void addLast(int data) {
-    // NodeDLL input = new NodeDLL(data);
-    // if (isEmpty()) {
-    // head = tail = input;
-    // } else {
-    // input.prev = tail;
-    // tail.next = input;
-    // tail = input;
-    // }
-    // size++;
-    // }
+    public void addLast(String barang, int harga) {
+        NodeDLL input = new NodeDLL(barang, harga);
+        if (head == null) {
+            head = tail = input;
+        } else {
+            input.prev = tail;
+            tail.next = input;
+            tail = input;
+        }
+        size++;
+    }
 
     // public void removeFirst() {
     // if (!isEmpty()) {
@@ -172,24 +178,18 @@ class DLL {
         return false;
     }
 
-    public void search(String barang) {
+    public NodeDLL search(String barang) {
         NodeDLL pointer = head;
-        boolean found = false;
-        if (pointer == null) {
-            System.out.println("Barang tidak ditemukan");
-            return;
-        }
+
         while (pointer != null) {
             if (pointer.barang.equals(barang)) {
-                System.out.println("Barang = " + pointer.barang + " \nHarga = " + pointer.harga);
-                found = true;
+                return pointer;
             }
+
             pointer = pointer.next;
         }
-        if (found == false) {
-            System.out.println("Barang tidak ditemukan");
 
-        }
+        return null;
     }
 
     public void printToLast() {
@@ -231,11 +231,11 @@ class DLL {
     public int sum() {
         int sum = 0;
         NodeDLL temp = head;
-        int n = this.size;
+
         if (temp == null) {
             return sum;
         } else {
-            for (int i = 0; i < n; i++) {
+            while (temp != null) {
                 sum += temp.harga;
                 temp = temp.next;
             }
