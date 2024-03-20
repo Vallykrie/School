@@ -1,129 +1,92 @@
+import java.util.Scanner;
+
 class Node {
     int data;
-    Node prev;
     Node next;
 
-    public Node(int data) {
+    Node(int data) {
         this.data = data;
-        this.prev = null;
         this.next = null;
     }
 }
 
-class CircularDoublyLinkedList {
-    Node head;
+class Stack {
+    Node top;
 
-    public CircularDoublyLinkedList() {
-        this.head = null;
+    Stack() {
+        this.top = null;
     }
 
-    public void addFirst(int data) {
+    void push(int data) {
         Node newNode = new Node(data);
-        if (head == null) {
-            head = newNode;
-            head.next = head;
-            head.prev = head;
+        if (top == null) {
+            top = newNode;
         } else {
-            newNode.next = head;
-            newNode.prev = head.prev;
-            head.prev.next = newNode;
-            head.prev = newNode;
-            head = newNode;
+            newNode.next = top;
+            top = newNode;
         }
     }
 
-    public void addLast(int data) {
-        Node newNode = new Node(data);
-        if (head == null) {
-            head = newNode;
-            head.next = head;
-            head.prev = head;
-        } else {
-            newNode.next = head;
-            newNode.prev = head.prev;
-            head.prev.next = newNode;
-            head.prev = newNode;
+    int pop() {
+        if (top == null) {
+            throw new IllegalStateException("Stack is empty");
         }
+        int data = top.data;
+        top = top.next;
+        return data;
     }
 
-    public void removeFirst() {
-        if (head == null) {
-            System.out.println("DATA IS EMPTY!");
-        } else if (head.next == head) {
-            head = null;
-        } else {
-            head.prev.next = head.next;
-            head.next.prev = head.prev;
-            head = head.next;
-        }
-    }
-
-    public void removeLast() {
-        if (head == null) {
-            System.out.println("DATA IS EMPTY!");
-        } else if (head.next == head) {
-            head = null;
-        } else {
-            head.prev.prev.next = head;
-            head.prev = head.prev.prev;
-        }
-    }
-
-    public boolean isThere(int data) {
-        if (head == null) {
-            return false;
-        } else {
-            Node current = head;
-            do {
-                if (current.data == data) {
-                    return true;
-                }
-                current = current.next;
-            } while (current != head);
-            return false;
-        }
-    }
-
-    public void printAll() {
-        if (head == null) {
-            System.out.println("DATA IS EMPTY!");
-        } else {
-            Node current = head;
-            do {
-                System.out.print(current.data + " ");
-                current = current.next;
-            } while (current != head);
-            System.out.println();
-        }
-    }
-
-    public void printSpecial() {
-        if (head == null) {
-            System.out.println("DATA IS EMPTY!");
-        } else {
-            Node current = head.prev;
-            while (current != head) {
-                System.out.print(current.data + " ");
-                current = current.prev;
-            }
-            System.out.println();
-        }
+    boolean isEmpty() {
+        return top == null;
     }
 }
 
 public class test1 {
-    public static void main(String[] args) {
-        CircularDoublyLinkedList cdll = new CircularDoublyLinkedList();
+    public static int evaluatePostfix(String postfix) {
+        Stack stack = new Stack();
+        for (int i = 0; i < postfix.length(); i++) {
+            char ch = postfix.charAt(i);
+            if (Character.isDigit(ch)) {
+                stack.push(ch - '0');
+            } else {
+                int operand2 = stack.pop();
+                int operand1 = stack.pop();
+                int result = performOperation(ch, operand1, operand2);
+                stack.push(result);
+            }
+        }
+        return stack.pop();
+    }
 
-        // Sample input commands
-        cdll.addLast(60);
-        cdll.addLast(5);
-        cdll.addLast(6);
-        cdll.addLast(1);
-        cdll.printAll();
-        System.out.println(cdll.isThere(99));
-        cdll.removeFirst();
-        cdll.removeLast();
-        cdll.printSpecial();
+    public static int performOperation(char operator, int operand1, int operand2) {
+        switch (operator) {
+            case '+':
+                return operand1 + operand2;
+            case '-':
+                return operand1 - operand2;
+            case '*':
+                return operand1 * operand2;
+            case '/':
+                return operand1 / operand2;
+            case '^':
+                return (int) Math.pow(operand1, operand2);
+            default:
+                throw new IllegalArgumentException("Invalid operator: " + operator);
+        }
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        String postfix1 = scanner.nextLine();
+        String postfix2 = scanner.nextLine();
+
+        int result1 = evaluatePostfix(postfix1);
+        int result2 = evaluatePostfix(postfix2);
+
+        if (result1 == result2) {
+            System.out.println("SAMA");
+        } else {
+            System.out.println("BEDA");
+        }
     }
 }

@@ -6,7 +6,7 @@ import java.text.DecimalFormatSymbols;
 /**
  * The Vehicle class represents a vehicle with its model, color, number plate, capacity, and price.
  */
-public class Vehicle {
+abstract class Vehicle {
     private String model, color, numberPlate;
     private int capacity;
     private double price;
