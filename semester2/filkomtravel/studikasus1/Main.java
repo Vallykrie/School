@@ -124,7 +124,8 @@ public class Main {
                         userList.get(indexLogin).viewProfile();
                         System.out.println(divider1);
                         if (!(userList.get(indexLogin).isMember())) {
-                            System.out.println("Nampaknya anda belum menjadi member Filkom Travel");
+                            System.out.println(
+                                    "Nampaknya anda belum menjadi member Filkom Travel\nAnda akan mendapatkan diskon 15% setiap transaksi dengan menjadi member.");
                             System.out.println("Apakah anda ingin menjadi member? (y/n) : ");
                             String jawab = than.nextLine();
                             if (jawab.equalsIgnoreCase("y")) {
@@ -145,121 +146,121 @@ public class Main {
                         break;
                     case 2:
 
-                    masihMemilih = true;
-                    while (masihMemilih) {
-                        System.out.println(divider2);
-                        System.out.println(" ".repeat(8) + "Pilih Kendaraan yang Ingin di Sewa" + " ".repeat(8));
-                        System.out.println();
-                        System.out.println("1. Van");
-                        System.out.println("2. Mobil");
-                        System.out.println("3. Motor");
-                        System.out.println("4. Keluar");
-                        System.out.println();
-                        System.out.println("Ketik 1, 2, 3, atau 4");
-                        System.out.print("-> ");
-                        pilih = than.nextInt();
-                        than.nextLine();
-                        String jawab;
-        
-                        switch (pilih) {
-                            case 1: 
-                                System.out.println(divider1);
-                                van1.printInfo();
-                                System.out.println();
-                                System.out.println("Apakah anda ingin menyewa kendaraan ini? (y/n)");
-                                jawab = than.nextLine();
-                                if (jawab.equalsIgnoreCase("y")) {
-                                    System.out.println("Berapa jam anda ingin menyewa?");
-                                    int jam = than.nextInt();
-                                    than.nextLine();
-                                    System.out.print("Tanggal sewa (yyyy/mm/dd): ");
-                                    String tanggal = than.nextLine();
-                                    System.out.print("Jam sewa (hh:mm): ");
-                                    String waktu = than.nextLine();
-                                    String[] tanggalSewa = tanggal.split("/");
-                                    String[] jamSewa = waktu.split(":");
-        
-                                    // Nota
-                                    Receipt nota = new Receipt(tanggalSewa, jam, van1.getPrice() * jam, jamSewa);
-                                    nota.print();
-                                    inMenu = false;
+                        masihMemilih = true;
+                        while (masihMemilih) {
+                            System.out.println(divider2);
+                            System.out.println(" ".repeat(8) + "Pilih Kendaraan yang Ingin di Sewa" + " ".repeat(8));
+                            System.out.println();
+                            System.out.println("1. Van");
+                            System.out.println("2. Mobil");
+                            System.out.println("3. Motor");
+                            System.out.println("4. Keluar");
+                            System.out.println();
+                            System.out.println("Ketik 1, 2, 3, atau 4");
+                            System.out.print("-> ");
+                            pilih = than.nextInt();
+                            than.nextLine();
+                            String jawab;
+
+                            switch (pilih) {
+                                case 1:
+                                    System.out.println(divider1);
+                                    van1.printInfo();
+                                    System.out.println();
+                                    System.out.println("Apakah anda ingin menyewa kendaraan ini? (y/n)");
+                                    jawab = than.nextLine();
+                                    if (jawab.equalsIgnoreCase("y")) {
+                                        System.out.println("Berapa jam anda ingin menyewa?");
+                                        int jam = than.nextInt();
+                                        than.nextLine();
+                                        System.out.print("Tanggal sewa (yyyy/mm/dd): ");
+                                        String tanggal = than.nextLine();
+                                        System.out.print("Jam sewa (hh:mm): ");
+                                        String waktu = than.nextLine();
+                                        String[] tanggalSewa = tanggal.split("/");
+                                        String[] jamSewa = waktu.split(":");
+
+                                        // Nota
+                                        Receipt nota = new Receipt(tanggalSewa, jam, van1.getPrice() * jam, jamSewa);
+                                        nota.print(userList.get(indexLogin).isMember());
+                                        inMenu = false;
+                                        masihMemilih = false;
+                                        isRunning = false;
+                                        System.out.println();
+                                        System.out.println("Terima kasih telah menggunakan layanan kami");
+                                        System.out.println();
+                                    }
+
+                                    break;
+                                case 2:
+                                    System.out.println(divider1);
+                                    mobil1.printInfo();
+                                    System.out.println();
+                                    System.out.println("Apakah anda ingin menyewa kendaraan ini? (y/n)");
+                                    jawab = than.nextLine();
+                                    if (jawab.equalsIgnoreCase("y")) {
+                                        System.out.println("Berapa jam anda ingin menyewa?");
+                                        int jam = than.nextInt();
+                                        than.nextLine();
+                                        System.out.print("Tanggal sewa (yyyy/mm/dd): ");
+                                        String tanggal = than.nextLine();
+                                        System.out.print("Jam sewa (hh:mm): ");
+                                        String waktu = than.nextLine();
+                                        String[] tanggalSewa = tanggal.split("/");
+                                        String[] jamSewa = waktu.split(":");
+
+                                        // Nota
+                                        Receipt nota = new Receipt(tanggalSewa, jam, mobil1.getPrice() * jam, jamSewa);
+                                        nota.print(userList.get(indexLogin).isMember());
+                                        inMenu = false;
+                                        masihMemilih = false;
+                                        isRunning = false;
+                                        System.out.println();
+                                        System.out.println("Terima kasih telah menggunakan layanan kami");
+                                        System.out.println();
+                                    }
+                                    break;
+                                case 3:
+                                    System.out.println(divider1);
+                                    motor1.printInfo();
+                                    System.out.println();
+                                    System.out.println("Apakah anda ingin menyewa kendaraan ini? (y/n)");
+                                    jawab = than.nextLine();
+                                    if (jawab.equalsIgnoreCase("y")) {
+                                        System.out.println("Berapa jam anda ingin menyewa?");
+                                        int jam = than.nextInt();
+                                        than.nextLine();
+                                        System.out.print("Tanggal sewa (yyyy/mm/dd): ");
+                                        String tanggal = than.nextLine();
+                                        System.out.print("Jam sewa (hh:mm): ");
+                                        String waktu = than.nextLine();
+                                        String[] tanggalSewa = tanggal.split("/");
+                                        String[] jamSewa = waktu.split(":");
+
+                                        // Nota
+                                        Receipt nota = new Receipt(tanggalSewa, jam, motor1.getPrice() * jam, jamSewa);
+                                        nota.print(userList.get(indexLogin).isMember());
+                                        inMenu = false;
+                                        masihMemilih = false;
+                                        isRunning = false;
+                                        System.out.println();
+                                        System.out.println("Terima kasih telah menggunakan layanan kami");
+                                        System.out.println();
+                                    }
+                                    break;
+                                case 4:
                                     masihMemilih = false;
-                                    isRunning = false;
-                                    System.out.println();
-                                    System.out.println("Terima kasih telah menggunakan layanan kami");
-                                    System.out.println();
-                                }
-        
-                                break;
-                            case 2:
-                                System.out.println(divider1);
-                                mobil1.printInfo();
-                                System.out.println();
-                                System.out.println("Apakah anda ingin menyewa kendaraan ini? (y/n)");
-                                jawab = than.nextLine();
-                                if (jawab.equalsIgnoreCase("y")) {
-                                    System.out.println("Berapa jam anda ingin menyewa?");
-                                    int jam = than.nextInt();
-                                    than.nextLine();
-                                    System.out.print("Tanggal sewa (yyyy/mm/dd): ");
-                                    String tanggal = than.nextLine();
-                                    System.out.print("Jam sewa (hh:mm): ");
-                                    String waktu = than.nextLine();
-                                    String[] tanggalSewa = tanggal.split("/");
-                                    String[] jamSewa = waktu.split(":");
-        
-                                    // Nota
-                                    Receipt nota = new Receipt(tanggalSewa, jam, mobil1.getPrice() * jam, jamSewa);
-                                    nota.print();
                                     inMenu = false;
-                                    masihMemilih = false;
                                     isRunning = false;
-                                    System.out.println();
-                                    System.out.println("Terima kasih telah menggunakan layanan kami");
-                                    System.out.println();
-                                }
-                                break;
-                            case 3:
-                                System.out.println(divider1);
-                                motor1.printInfo();
-                                System.out.println();
-                                System.out.println("Apakah anda ingin menyewa kendaraan ini? (y/n)");
-                                jawab = than.nextLine();
-                                if (jawab.equalsIgnoreCase("y")) {
-                                    System.out.println("Berapa jam anda ingin menyewa?");
-                                    int jam = than.nextInt();
-                                    than.nextLine();
-                                    System.out.print("Tanggal sewa (yyyy/mm/dd): ");
-                                    String tanggal = than.nextLine();
-                                    System.out.print("Jam sewa (hh:mm): ");
-                                    String waktu = than.nextLine();
-                                    String[] tanggalSewa = tanggal.split("/");
-                                    String[] jamSewa = waktu.split(":");
-        
-                                    // Nota
-                                    Receipt nota = new Receipt(tanggalSewa, jam, motor1.getPrice() * jam, jamSewa);
-                                    nota.print();
-                                    inMenu = false;
-                                    masihMemilih = false;
-                                    isRunning = false;
-                                    System.out.println();
-                                    System.out.println("Terima kasih telah menggunakan layanan kami");
-                                    System.out.println();
-                                }
-                                break;
-                            case 4:
-                                masihMemilih = false;
-                                inMenu = false;
-                                isRunning = false;
-                                break;
-        
-                            default:
-                                break;
+                                    break;
+
+                                default:
+                                    break;
+                            }
                         }
-                    }
-        
+
                         break;
-                    case 3: 
+                    case 3:
                         inMenu = false;
                         isRunning = false;
                         break;

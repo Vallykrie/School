@@ -4,15 +4,17 @@ import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 
 /**
- * The Vehicle class represents a vehicle with its model, color, number plate, capacity, and price.
+ * The Vehicle class represents a vehicle with its model, color, number plate,
+ * capacity, and price.
  */
-abstract class Vehicle {
+public abstract class Vehicle {
     private String model, color, numberPlate;
     private int capacity;
     private double price;
 
     /**
-     * Constructs a Vehicle object with the specified model, color, number plate, capacity, and price.
+     * Constructs a Vehicle object with the specified model, color, number plate,
+     * capacity, and price.
      * 
      * @param model       the model of the vehicle
      * @param color       the color of the vehicle
@@ -29,7 +31,8 @@ abstract class Vehicle {
     }
 
     /**
-     * Prints the information of the vehicle, including model, color, number plate, capacity, and price.
+     * Prints the information of the vehicle, including model, color, number plate,
+     * capacity, and price.
      */
     public void printInfo() {
         // Price Formats
@@ -135,5 +138,5 @@ abstract class Vehicle {
     public void setPrice(double price) {
         this.price = price;
     }
-    
+
 }

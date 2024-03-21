@@ -5,7 +5,8 @@ import java.text.DecimalFormatSymbols;
 
 /**
  * The Receipt class represents a receipt for a rental transaction.
- * It contains information about the rental date, duration, price, and return date.
+ * It contains information about the rental date, duration, price, and return
+ * date.
  */
 public class Receipt {
 
@@ -17,9 +18,9 @@ public class Receipt {
      * Constructs a Receipt object with the specified rental information.
      * 
      * @param tanggalSewa the rental date in the format [year, month, day]
-     * @param jam the duration of the rental in hours
-     * @param harga the price of the rental
-     * @param jamSewa the rental time in the format [hour, minute]
+     * @param jam         the duration of the rental in hours
+     * @param harga       the price of the rental
+     * @param jamSewa     the rental time in the format [hour, minute]
      */
     Receipt(String[] tanggalSewa, int jam, double harga, String[] jamSewa) {
         this.tanggalSewa = tanggalSewa;
@@ -29,9 +30,15 @@ public class Receipt {
     }
 
     /**
-     * Prints the details of the rental transaction, including rental date, duration, return date, and price.
+     * Prints the details of the rental transaction, including rental date,
+     * duration, return date, and price.
      */
-    public void print() {
+    public void print(boolean isMember) {
+        // Member discount
+        if (isMember) {
+            this.harga *= 0.85;
+        }
+
         // Price Formats
         DecimalFormatSymbols symbols = new DecimalFormatSymbols();
         symbols.setGroupingSeparator('.');
