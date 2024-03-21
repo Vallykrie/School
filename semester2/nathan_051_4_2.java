@@ -6,118 +6,78 @@ public class nathan_051_4_2 {
         String postfix1 = than.nextLine();
         String postfix2 = than.nextLine();
         Stack stack1 = new Stack();
+        int result = 0;
+
+        for (int i = 0; i < postfix1.length(); i++) {
+            char ch = postfix1.charAt(i);
+            if (Character.isDigit(ch)) {
+                stack1.push(ch - '0');
+            } else {
+                int operand2 = stack1.pop();
+                int operand1 = stack1.pop();
+                switch (ch) {
+                    case '+':
+                        result = operand1 + operand2;
+                        break;
+                    case '-':
+                        result = operand1 - operand2;
+                        break;
+                    case '*':
+                        result = operand1 * operand2;
+                        break;
+                    case '/':
+                        result = operand1 / operand2;
+                        break;
+                    case '^':
+                        result = (int) Math.pow(operand1, operand2);
+                        break;
+                }
+                stack1.push(result);
+            }
+        }
+        int result1 = stack1.pop();
+
         Stack stack2 = new Stack();
-        String operator1 = "";
-        String operator2 = "";
-
-        for (int i = postfix1.length(); i > 0; i--) {
-            stack1.push(postfix1.charAt(i - 1));
-        }
-
-        for (int i = postfix2.length(); i > 0; i--) {
-            stack2.push(postfix2.charAt(i - 1));
-        }
-
-        while (true) {
-            operator1 = "";
-            operator1 += stack1.pop();
-            if (stack1.isEmpty()) {
-                break;
+        for (int i = 0; i < postfix2.length(); i++) {
+            char ch = postfix2.charAt(i);
+            if (Character.isDigit(ch)) {
+                stack2.push(ch - '0');
             } else {
-                operator1 += stack1.pop();
-                operator1 += stack1.pop();
-
-            }
-
-            if (operator1.contains("+")) {
-                operator1 = operator1.replace("+", "");
-                double a = Character.getNumericValue(operator1.charAt(0));
-                double b = Character.getNumericValue(operator1.charAt(1));
-                double result = a + b;
-                stack1.push((Character.forDigit((int) result, 10)));
-            } else if (operator1.contains("-")) {
-                operator1 = operator1.replace("-", "");
-                double a = Character.getNumericValue(operator1.charAt(0));
-                double b = Character.getNumericValue(operator1.charAt(1));
-                double result = a - b;
-                stack1.push((Character.forDigit((int) result, 10)));
-            } else if (operator1.contains("*")) {
-                operator1 = operator1.replace("*", "");
-                double a = Character.getNumericValue(operator1.charAt(0));
-                double b = Character.getNumericValue(operator1.charAt(1));
-                double result = a * b;
-                stack1.push((Character.forDigit((int) result, 10)));
-            } else if (operator1.contains("/")) {
-                operator1 = operator1.replace("/", "");
-                double a = Character.getNumericValue(operator1.charAt(0));
-                double b = Character.getNumericValue(operator1.charAt(1));
-                double result = a / b;
-                stack1.push((Character.forDigit((int) result, 10)));
-            } else if (operator1.contains("^")) {
-                operator1 = operator1.replace("^", "");
-                double a = Character.getNumericValue(operator1.charAt(0));
-                double b = Character.getNumericValue(operator1.charAt(1));
-                double result = Math.pow(a, b);
-                stack1.push((Character.forDigit((int) result, 10)));
+                int b = stack2.pop();
+                int a = stack2.pop();
+                switch (ch) {
+                    case '+':
+                        result = a + b;
+                        break;
+                    case '-':
+                        result = a - b;
+                        break;
+                    case '*':
+                        result = a * b;
+                        break;
+                    case '/':
+                        result = a / b;
+                        break;
+                    case '^':
+                        result = (int) Math.pow(a, b);
+                        break;
+                }
+                stack2.push(result);
             }
         }
+        int result2 = stack2.pop();
 
-        while (true) {
-            operator2 = "";
-            operator2 += stack2.pop();
-            if (stack2.isEmpty()) {
-                break;
-            } else {
-                operator2 += stack2.pop();
-                operator2 += stack2.pop();
-
-            }
-
-            if (operator2.contains("+")) {
-                operator2 = operator2.replace("+", "");
-                double a = Character.getNumericValue(operator2.charAt(0));
-                double b = Character.getNumericValue(operator2.charAt(1));
-                double result = a + b;
-                stack2.push((Character.forDigit((int) result, 10)));
-            } else if (operator2.contains("-")) {
-                operator2 = operator2.replace("-", "");
-                double a = Character.getNumericValue(operator2.charAt(0));
-                double b = Character.getNumericValue(operator2.charAt(1));
-                double result = a - b;
-                stack2.push((Character.forDigit((int) result, 10)));
-            } else if (operator2.contains("*")) {
-                operator2 = operator2.replace("*", "");
-                double a = Character.getNumericValue(operator2.charAt(0));
-                double b = Character.getNumericValue(operator2.charAt(1));
-                double result = a * b;
-                stack2.push((Character.forDigit((int) result, 10)));
-            } else if (operator2.contains("/")) {
-                operator2 = operator2.replace("/", "");
-                double a = Character.getNumericValue(operator2.charAt(0));
-                double b = Character.getNumericValue(operator2.charAt(1));
-                double result = a / b;
-                stack2.push((Character.forDigit((int) result, 10)));
-            } else if (operator2.contains("^")) {
-                operator2 = operator2.replace("^", "");
-                double a = Character.getNumericValue(operator2.charAt(0));
-                double b = Character.getNumericValue(operator2.charAt(1));
-                double result = Math.pow(a, b);
-                stack2.push((Character.forDigit((int) result, 10)));
-            }
-        }
-
-        if (operator1.equals(operator2)) {
+        if (result1 == result2) {
             System.out.println("SAMA");
         } else {
             System.out.println("BEDA");
-
         }
     }
 }
 
 class Stack {
     NodeStack head, tail;
-
+    char a;
     int size = 0;
 
     public int size() {
@@ -128,7 +88,7 @@ class Stack {
         return size == 0;
     }
 
-    public void push(char data) {
+    public void push(int data) {
         NodeStack input = new NodeStack(data);
         if (isEmpty()) {
             head = tail = input;
@@ -139,11 +99,11 @@ class Stack {
         size++;
     }
 
-    public char pop() {
+    public int pop() {
         if (size == 0) {
             return 0;
         }
-        char dataSebelumnya = tail.data;
+        int dataSebelumnya = tail.data;
         if (size == 1) {
             head = tail = null;
         } else {
@@ -174,10 +134,10 @@ class Stack {
 }
 
 class NodeStack {
-    char data;
+    int data;
     NodeStack next;
 
-    NodeStack(char data) {
+    NodeStack(int data) {
         this.data = data;
         this.next = null;
     }
