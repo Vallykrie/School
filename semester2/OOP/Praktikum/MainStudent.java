@@ -1,7 +1,11 @@
 package OOP.Praktikum;
 
+import java.util.Scanner;
+
 public class MainStudent {
     public static void main(String[] args) {
+        Scanner than = new Scanner(System.in);
+
         Student anna = new Student();
         anna.setName("Anna");
         anna.setAddress("Malang");
@@ -33,7 +37,31 @@ public class MainStudent {
 
         // menggunakan constructor dengan param nilai pelajaran
         System.out.println("===================");
-        Student than = new Student(100, 100, 100);
-        than.displayMessage();
+        Student thanathan = new Student(100, 100, 100);
+        thanathan.displayMessage();
+
+        // memasukkan jumlah siswa sesuai dengan keinginan user
+        System.out.println("===================");
+        System.out.print("Masukkan jumlah siswa: ");
+        int jumlahSiswa = than.nextInt();
+        than.nextLine();
+
+        Student[] siswa = new Student[jumlahSiswa];
+
+        for (int i = 0; i < jumlahSiswa; i++) {
+            System.out.println();
+            System.out.println("Siswa ke-" + (i + 1));
+            System.out.print("Nama: ");
+            String nama = than.nextLine();
+            System.out.print("Alamat: ");
+            String alamat = than.nextLine();
+            System.out.print("Umur: ");
+            int umur = than.nextInt();
+            than.nextLine();
+
+            siswa[i] = new Student(nama, alamat, umur);
+        }
+
+        Student.jumlahObjek();
     }
 }

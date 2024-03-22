@@ -8,23 +8,27 @@ public class Student {
     private double englishGrade;
     private double scienceGrade;
     private double average;
+    private static int jumlah = 0;
 
     public Student() {
         name = "";
         address = "";
         age = 0;
+        jumlah++;
     }
 
     public Student(String n, String a, int ag) {
         name = n;
         address = a;
         age = ag;
+        jumlah++;
     }
 
     public Student(double mathGrade, double englishGrade, double scienceGrade) {
         this.mathGrade = mathGrade;
         this.englishGrade = englishGrade;
         this.scienceGrade = scienceGrade;
+        jumlah++;
 
     }
 
@@ -68,5 +72,9 @@ public class Student {
 
     public boolean statusAkhir() {
         return getAverage() >= 61;
+    }
+
+    public static void jumlahObjek() {
+        System.out.println("Jumlah objek yang telah dibuat: " + jumlah);
     }
 }
