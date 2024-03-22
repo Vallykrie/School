@@ -27,7 +27,7 @@ public class Rasional {
         A = (pembilang < penyebut) ? penyebut : pembilang;
         B = (pembilang < penyebut) ? pembilang : penyebut;
 
-        while (B != 0) {
+        for (; B != 0;) {
             temp = A % B;
             A = B;
             B = temp;
@@ -41,9 +41,45 @@ public class Rasional {
         return (penyebut == 0.0) ? 0.0 : (double) pembilang / (double) penyebut;
     }
 
-    // oprator >
+    // operator >
     public boolean moreThan(Rasional A) {
         return (pembilang * A.penyebut > penyebut * A.pembilang);
+    }
+
+    // operator <
+    public boolean lessThan(Rasional A) {
+        return (pembilang * A.penyebut < penyebut * A.pembilang);
+    }
+
+    // operator <=
+    public boolean lessThanOrEqual(Rasional A) {
+        return (pembilang * A.penyebut <= penyebut * A.pembilang);
+    }
+
+    // operator >=
+    public boolean moreThanOrEqual(Rasional A) {
+        return (pembilang * A.penyebut >= penyebut * A.pembilang);
+    }
+
+    // operator -
+    public String subtract(Rasional A) {
+        int newPembilang = (pembilang * A.penyebut) - (penyebut * A.pembilang);
+        int newPenyebut = penyebut * A.penyebut;
+        return (new Rasional(newPembilang, newPenyebut)).lihat();
+    }
+
+    // operator *
+    public String multiply(Rasional A) {
+        int newPembilang = pembilang * A.pembilang;
+        int newPenyebut = penyebut * A.penyebut;
+        return (new Rasional(newPembilang, newPenyebut)).lihat();
+    }
+
+    // operator /
+    public String divide(Rasional A) {
+        int newPembilang = pembilang * A.penyebut;
+        int newPenyebut = penyebut * A.pembilang;
+        return (new Rasional(newPembilang, newPenyebut)).lihat();
     }
 
     // operator Unary- ---> A = -A
@@ -59,5 +95,9 @@ public class Rasional {
 
     public void cetak() {
         System.out.println(pembilang + "/" + penyebut);
+    }
+
+    public String lihat() {
+        return (pembilang + "/" + penyebut);
     }
 }

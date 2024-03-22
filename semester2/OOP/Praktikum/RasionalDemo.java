@@ -10,6 +10,12 @@ public class RasionalDemo {
         System.out.println();
 
         System.out.println("R1 > R2 : " + R1.moreThan(R2));
+        System.out.println("R1 < R2 : " + R1.lessThan(R2));
+        System.out.println("R1 >= R2 : " + R1.moreThanOrEqual(R2));
+        System.out.println("R1 <= R2 : " + R1.lessThanOrEqual(R2));
+        System.out.println("R1 - R2 : " + R1.subtract(R2));
+        System.out.println("R1 * R2 : " + R1.multiply(R2));
+        System.out.println("R1 / R2 : " + R1.divide(R2));
         System.out.println();
 
         System.out.print("R1 : ");
