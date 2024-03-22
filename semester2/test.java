@@ -4,22 +4,31 @@ import java.text.*;
 import java.math.*;
 import java.util.regex.*;
 
-class NodeCDLL {
+class DoublyNode {
     public String data;
-    public NodeCDLL prev;
-    public NodeCDLL next;
+    public DoublyNode prev;
+    public DoublyNode next;
 
-    NodeCDLL(String data) {
+    DoublyNode() {
+    }
+
+    DoublyNode(String data) {
         this.data = data;
+    }
+
+    DoublyNode(String data, DoublyNode prev, DoublyNode next) {
+        this.data = data;
+        this.prev = prev;
+        this.next = next;
     }
 }
 
-class CDLL {
-    NodeCDLL head;
-    NodeCDLL tail;
+class DoublyLinkedList {
+    DoublyNode head;
+    DoublyNode tail;
     int size;
 
-    public CDLL() {
+    public DoublyLinkedList() {
         this.head = null;
         this.tail = null;
         this.size = 0;
@@ -34,151 +43,126 @@ class CDLL {
     }
 
     public void printToLast() {
-        if (isEmpty()) {
-            System.out.println("List is empty.");
-            return;
-        }
-        NodeCDLL current = head;
-        do {
-            System.out.print(current.data + (current.next != head ? " -- " : ""));
+        DoublyNode current = head;
+        while (current != null) {
+            System.out.print(current.data + (current.next != null ? " -- " : ""));
             current = current.next;
-        } while (current != head);
+        }
         System.out.println();
     }
 
-    public void addFirst(String data) {
-        NodeCDLL newNode = new NodeCDLL(data);
+    void addFirst(String data) {
+        DoublyNode newNode = new DoublyNode(data);
         if (isEmpty()) {
             head = tail = newNode;
-            newNode.prev = newNode.next = newNode;
         } else {
-            newNode.next = head;
-            newNode.prev = tail;
             head.prev = newNode;
-            tail.next = newNode;
+            newNode.next = head;
             head = newNode;
         }
         size++;
     }
 
     public void printToFirst() {
-        if (isEmpty()) {
-            System.out.println("List is empty.");
-            return;
-        }
-        NodeCDLL current = tail;
-        do {
-            System.out.print(current.data + (current.prev != tail ? " -- " : ""));
+        DoublyNode current = tail;
+        while (current != null) {
+            System.out.print(current.data + (current.prev != null ? " -- " : ""));
             current = current.prev;
-        } while (current != tail);
+        }
         System.out.println();
     }
 
     public void addLast(String data) {
+        DoublyNode newNode = new DoublyNode(data);
         if (isEmpty()) {
-            addFirst(data);
+            head = tail = newNode;
         } else {
-            NodeCDLL newNode = new NodeCDLL(data);
-            newNode.next = head;
-            newNode.prev = tail;
             tail.next = newNode;
-            head.prev = newNode;
+            newNode.prev = tail;
             tail = newNode;
-            size++;
         }
+        size++;
     }
 
     public void removeFirst() {
-        if (isEmpty()) {
-            return;
+        if (!isEmpty()) {
+            if (head == tail) {
+                head = tail = null;
+            } else {
+                head = head.next;
+                head.prev = null;
+            }
+            size--;
         }
-        if (head == tail) {
-            head = tail = null;
-        } else {
-            head = head.next;
-            head.prev = tail;
-            tail.next = head;
-        }
-        size--;
     }
 
     public void removeLast() {
-        if (isEmpty()) {
-            return;
+        if (!isEmpty()) {
+            if (head == tail) {
+                head = tail = null;
+            } else {
+                tail = tail.prev;
+                tail.next = null;
+            }
+            size--;
         }
-        if (head == tail) {
-            head = tail = null;
-        } else {
-            tail = tail.prev;
-            tail.next = head;
-            head.prev = tail;
-        }
-        size--;
     }
 
     public void makeEmpty() {
-        head = tail = null;
+        head = null;
+        tail = null;
         size = 0;
     }
 
     public void remove(int index) {
-        if (index < 0 || index >= size) {
+        if (index < 0 || index >= size)
             return;
-        }
+
+        DoublyNode current = head;
         if (index == 0) {
             removeFirst();
-            return;
         } else if (index == size - 1) {
             removeLast();
-            return;
+        } else {
+            for (int i = 0; i < index; i++) {
+                current = current.next;
+            }
+            current.prev.next = current.next;
+            current.next.prev = current.prev;
+            size--;
         }
-        NodeCDLL current = head;
-        for (int i = 0; i < index; i++) {
-            current = current.next;
-        }
-        current.prev.next = current.next;
-        current.next.prev = current.prev;
-        if (current == tail) {
-            tail = current.prev;
-        }
-        size--;
     }
 
     public void remove(String key) {
-        if (isEmpty()) {
-            return;
-        }
-        NodeCDLL current = head;
-        do {
+        DoublyNode current = head;
+        while (current != null) {
             if (current.data.equals(key)) {
                 if (current == head) {
                     removeFirst();
-                    return;
                 } else if (current == tail) {
                     removeLast();
-                    return;
                 } else {
                     current.prev.next = current.next;
                     current.next.prev = current.prev;
                     size--;
-                    return;
                 }
+                return;
             }
             current = current.next;
-        } while (current != head);
+        }
     }
 
     public void insert(int index, String data) {
-        if (index < 0 || index > size) {
+        if (index < 0 || index > size)
             return;
-        }
+
         if (index == 0) {
             addFirst(data);
-        } else if (index == size) {
+        } else if (index == size - 1) {
             addLast(data);
         } else {
-            NodeCDLL newNode = new NodeCDLL(data);
-            NodeCDLL current = head;
+            DoublyNode newNode = new DoublyNode(data);
+            DoublyNode current = head;
             for (int i = 0; i < index; i++) {
                 current = current.next;
             }
@@ -191,62 +175,53 @@ class CDLL {
     }
 
     public void insertAfter(String input, String key) {
-        NodeCDLL current = head;
-        if (isEmpty()) {
-            addFirst(input);
-            return;
-        }
-        boolean found = false;
-        do {
+        DoublyNode current = head;
+        while (current != null) {
             if (current.data.equals(key)) {
-                NodeCDLL newNode = new NodeCDLL(input);
+                DoublyNode newNode = new DoublyNode(input);
                 newNode.next = current.next;
                 newNode.prev = current;
-                current.next.prev = newNode;
+                if (current.next != null) {
+                    current.next.prev = newNode;
+                }
                 current.next = newNode;
                 if (current == tail) {
                     tail = newNode;
                 }
                 size++;
-                found = true;
-                break;
+                return;
             }
             current = current.next;
-        } while (current != head);
-
-        if (!found) {
-            return;
         }
+        addLast(key);
     }
 
     public void insertBefore(String input, String key) {
-        if (isEmpty()) {
-            addFirst(input);
+        if (head != null && head.data.equals(key)) {
+            addFirst(key);
             return;
         }
-        NodeCDLL current = head;
-        do {
+
+        DoublyNode current = head;
+        while (current != null) {
             if (current.data.equals(key)) {
-                NodeCDLL newNode = new NodeCDLL(input);
-                newNode.next = current;
-                newNode.prev = current.prev;
+                DoublyNode newNode = new DoublyNode(input);
                 current.prev.next = newNode;
+                newNode.prev = current.prev;
+                newNode.next = current;
                 current.prev = newNode;
-                if (current == head) {
-                    head = newNode;
-                }
                 size++;
                 return;
             }
             current = current.next;
-        } while (current != head);
-        addLast(input);
+        }
+        addLast(key);
     }
 
     public String get(int index) {
         if (index < 0 || index >= size)
             return "Index out of bounds";
-        NodeCDLL current = head;
+        DoublyNode current = head;
         for (int i = 0; i < index; i++) {
             current = current.next;
         }
@@ -254,21 +229,22 @@ class CDLL {
     }
 
     public String get(String key) {
-        NodeCDLL current = head;
-        do {
+        DoublyNode current = head;
+        while (current != null) {
             if (current.data.equals(key)) {
                 return current.data;
             }
             current = current.next;
-        } while (current != head);
-        return "Data not found";
+        }
+        return "Book not found";
     }
 }
 
-public class test1 {
+public class test {
+    // Jangan ubah
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        CDLL doublyLinkedList = new CDLL();
+        DoublyLinkedList doublyLinkedList = new DoublyLinkedList();
 
         while (true) {
             String command = scanner.next();
