@@ -1,6 +1,8 @@
+package OOP.Praktikum;
+
 import java.util.Scanner;
 
-public class MainiMobil {
+public class MainMobil {
     public static void main(String[] args) {
 
         Scanner than = new Scanner(System.in);

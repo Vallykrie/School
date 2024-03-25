@@ -1,7 +1,4 @@
-package ASD;
-
 public class SortedList {
-
     /*
      * Private Attributes and Methods
      */
@@ -128,7 +125,7 @@ public class SortedList {
         for (Node i = head; i != null; i = i.next) {
             result += String.valueOf(i.item) + " ";
         }
-        return "[" +result.strip() + "]";
+        return "[" + result.strip() + "]";
     }
 
     public static void main(String[] args) {

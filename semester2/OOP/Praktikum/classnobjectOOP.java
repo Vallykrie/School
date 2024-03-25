@@ -1,3 +1,5 @@
+package OOP.Praktikum;
+
 import java.util.Scanner;
 
 // revisi kak hehehe tadi gaisi class dan object, mohon mff T_T

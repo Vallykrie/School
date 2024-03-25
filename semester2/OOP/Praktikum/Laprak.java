@@ -1,3 +1,5 @@
+package OOP.Praktikum;
+
 public class Laprak {
     public static void main(String[] args) {
         Mahasiswa mahasiswa1 = new Mahasiswa("235150207111000", "Nickolas Wewe", 3.3);
@@ -100,7 +102,7 @@ class SLL {
 
     void removeFirst() {
         if (isEmpty()) {
-            
+
         } else {
             head = head.next;
             size--;
@@ -112,7 +114,7 @@ class SLL {
 
     void removeLast() {
         if (isEmpty()) {
-            
+
         } else if (size == 1) {
             head = null;
             tail = null;
@@ -157,7 +159,7 @@ class SLL {
             temp = temp.next;
             index++;
         }
-        return -1; 
+        return -1;
     }
 
     Node get(int index) {
@@ -174,7 +176,7 @@ class SLL {
     void addSorted(Node input) {
         if (isEmpty() || ((Mahasiswa) input.data).getIpk() <= ((Mahasiswa) head.data).getIpk()) {
             addFirst(input);
-        } else if ( ((Mahasiswa) input.data).getIpk() >= ((Mahasiswa) tail.data).getIpk()) {
+        } else if (((Mahasiswa) input.data).getIpk() >= ((Mahasiswa) tail.data).getIpk()) {
             addLast(input);
         } else {
             Node temp = head;

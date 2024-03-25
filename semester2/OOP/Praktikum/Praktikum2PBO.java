@@ -1,3 +1,5 @@
+package OOP.Praktikum;
+
 import java.util.Scanner;
 
 public class Praktikum2PBO {
