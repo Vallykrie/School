@@ -1,36 +1,13 @@
 package OOP.Praktikum;
 
-import java.util.Scanner;
-
-public class test {
+public class Test {
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-
-        System.out.print("Masukkan jumlah siswa: ");
-        int jumlahSiswa = scanner.nextInt();
-
-        Student[] siswa = new Student[jumlahSiswa];
-
-        for (int i = 0; i < jumlahSiswa; i++) {
-            System.out.println("Siswa ke-" + (i + 1));
-            System.out.print("Nama: ");
-            String nama = scanner.next();
-            System.out.print("Alamat: ");
-            String alamat = scanner.next();
-            System.out.print("Umur: ");
-            int umur = scanner.nextInt();
-
-            siswa[i] = new Student(nama, alamat, umur);
-        }
-
-        scanner.close();
-
-        // Melakukan operasi lainnya dengan array siswa
-        // ...
-
-        // Contoh penggunaan metode displayMessage() pada setiap siswa
-        for (int i = 0; i < jumlahSiswa; i++) {
-            siswa[i].displayMessage();
-        }
+        Student s1 = new Student();
+        s1.setName("Enkapsulasi");
+        s1.setMark(90); // seharusnya 90 bukan "90"
+        System.out.println("s1Name is " + s1.getName()); // seharusnya getName() bukan setName()
+        System.out.println("s1Mark is " + s1.getMark()); // seharusnya getMark() bukan setMark()
+        System.out.println("name dan mark " + s1.getName() + " " + s1.getMark()); // seharusnya s1.getName() dan
+                                                                                  // s1.getMark()
     }
 }
