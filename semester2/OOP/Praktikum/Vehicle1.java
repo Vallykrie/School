@@ -1,7 +1,7 @@
 package OOP.Praktikum;
 
 public class Vehicle1 {
-    private double load, maxLoad;
+    protected double load, maxLoad;
 
     public Vehicle1(double max) {
         this.maxLoad = max;
