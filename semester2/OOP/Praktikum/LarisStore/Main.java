@@ -21,6 +21,10 @@ public class Main {
     static Akun akunPlatinum4 = new Akun("Komang", "0123", 100_000, Akun.Member.PLATINUM);
     static Akun akunPlatinum5 = new Akun("Jason", "3456", 10_000, Akun.Member.PLATINUM);
 
+    enum Member {
+        SILVER, GOLD, PLATINUM
+    }
+
     public static void main(String[] args) {
         Scanner than = new Scanner(System.in);
         boolean isRunning = true;
@@ -95,73 +99,7 @@ public class Main {
             }
 
             while (true) {
-                System.out.println();
-                System.out.println("-".repeat(50));
-                System.out.println("Akun anda ");
-                System.out.println("-".repeat(50));
-                switch (pilih) {
-                    case 1:
-                        switch (akun) {
-                            case 1:
-                                akunSilver1.show();
-                                break;
-                            case 2:
-                                akunSilver2.show();
-                                break;
-                            case 3:
-                                akunSilver3.show();
-                                break;
-                            case 4:
-                                akunSilver4.show();
-                                break;
-                            case 5:
-                                akunSilver5.show();
-                                break;
-
-                        }
-                        break;
-                    case 2:
-                        switch (akun) {
-                            case 1:
-                                akunGold1.show();
-                                break;
-                            case 2:
-                                akunGold2.show();
-                                break;
-                            case 3:
-                                akunGold3.show();
-                                break;
-                            case 4:
-                                akunGold4.show();
-                                break;
-                            case 5:
-                                akunGold5.show();
-                                break;
-
-                        }
-                        break;
-                    case 3:
-                        switch (akun) {
-                            case 1:
-                                akunPlatinum1.show();
-                                break;
-                            case 2:
-                                akunPlatinum2.show();
-                                break;
-                            case 3:
-                                akunPlatinum3.show();
-                                break;
-                            case 4:
-                                akunPlatinum4.show();
-                                break;
-                            case 5:
-                                akunPlatinum5.show();
-                                break;
-
-                        }
-                        break;
-
-                }
+                showAkun(pilih, akun);
                 System.out.println("-".repeat(50));
                 System.out.println();
                 System.out.println("1. Beli");
@@ -185,14 +123,10 @@ public class Main {
                         int pilih3 = than.nextInt();
                         than.nextLine();
                         System.out.println("-".repeat(50));
-                        System.out.println("Konfirmasi pembelian ");
-                        System.out.print("ID : ");
-                        int ID = than.nextInt();
-                        than.nextLine();
-                        System.out.print("PIN : ");
-                        String PIN = than.nextLine();
-
-                        beli(pilih, akun, pilih3);
+                        if (beli(pilih, akun, pilih3))
+                            ;
+                        else
+                            return;
 
                         break;
                     case 2:
@@ -279,29 +213,153 @@ public class Main {
         }
     }
 
-    static void beli(int pilih, int akun, int barang) {
-        switch (barang) {
+    static boolean beli(int pilih, int akun, int barang) {
+        switch (pilih) {
             case 1:
                 switch (akun) {
                     case 1:
-                        authenticate(akunSilver1.getID(), akunSilver1.getPin());
-                        akunSilver1.belanja(barang);
+                        if (authenticate(akunSilver1.getID(), akunSilver1.getPin(), akunSilver1.member)) {
+                            akunSilver1.belanja(barang);
+                            return true;
+                        } else
+                            return false;
+
+                    case 2:
+                        if (authenticate(akunSilver2.getID(), akunSilver2.getPin(), akunSilver2.member)) {
+                            akunSilver2.belanja(barang);
+                            return true;
+                        } else
+                            return false;
+
+                    case 3:
+                        if (authenticate(akunSilver3.getID(), akunSilver3.getPin(), akunSilver3.member)) {
+                            akunSilver3.belanja(barang);
+                            return true;
+                        } else
+                            return false;
+
+                    case 4:
+                        if (authenticate(akunSilver4.getID(), akunSilver4.getPin(), akunSilver4.member)) {
+                            akunSilver4.belanja(barang);
+                            return true;
+                        } else
+                            return false;
+
+                    case 5:
+                        if (authenticate(akunSilver5.getID(), akunSilver5.getPin(), akunSilver5.member)) {
+                            akunSilver5.belanja(barang);
+                            return true;
+                        } else
+                            return false;
+
+                }
+                break;
+            case 2:
+                switch (akun) {
+                    case 1:
+                        if (authenticate(akunGold1.getID(), akunGold1.getPin(), akunGold1.member)) {
+                            akunGold1.belanja(barang);
+                            return true;
+                        } else
+                            return false;
+
+                    case 2:
+                        if (authenticate(akunGold2.getID(), akunGold2.getPin(), akunGold2.member)) {
+                            akunGold2.belanja(barang);
+                            return true;
+                        } else
+                            return false;
+
+                    case 3:
+                        if (authenticate(akunGold3.getID(), akunGold3.getPin(), akunGold3.member)) {
+                            akunGold3.belanja(barang);
+                            return true;
+                        } else
+                            return false;
+
+                    case 4:
+                        if (authenticate(akunGold4.getID(), akunGold4.getPin(), akunGold4.member)) {
+                            akunGold4.belanja(barang);
+                            return true;
+                        } else
+                            return false;
+
+                    case 5:
+                        if (authenticate(akunGold5.getID(), akunGold5.getPin(), akunGold5.member)) {
+                            akunGold5.belanja(barang);
+                            return true;
+                        } else
+                            return false;
+
+                }
+                break;
+            case 3:
+                switch (akun) {
+                    case 1:
+                        if (authenticate(akunPlatinum1.getID(), akunPlatinum1.getPin(), akunPlatinum1.member)) {
+                            akunPlatinum1.belanja(barang);
+                            return true;
+                        } else
+                            return false;
+
+                    case 2:
+                        if (authenticate(akunPlatinum2.getID(), akunPlatinum2.getPin(), akunPlatinum2.member)) {
+                            akunPlatinum2.belanja(barang);
+                            return true;
+                        } else
+                            return false;
+
+                    case 3:
+                        if (authenticate(akunPlatinum3.getID(), akunPlatinum3.getPin(), akunPlatinum3.member)) {
+                            akunPlatinum3.belanja(barang);
+                            return true;
+                        } else
+                            return false;
+
+                    case 4:
+                        if (authenticate(akunPlatinum4.getID(), akunPlatinum4.getPin(), akunPlatinum4.member)) {
+                            akunPlatinum4.belanja(barang);
+                            return true;
+                        } else
+                            return false;
+
+                    case 5:
+                        if (authenticate(akunPlatinum5.getID(), akunPlatinum5.getPin(), akunPlatinum5.member)) {
+                            akunPlatinum5.belanja(barang);
+                            return true;
+                        } else
+                            return false;
+
+                }
+                break;
+
+        }
+        return false;
+
+    }
+
+    static void showAkun(int pilih, int akun) {
+        System.out.println();
+        System.out.println("-".repeat(50));
+        System.out.println("Akun anda ");
+        System.out.println("-".repeat(50));
+        switch (pilih) {
+            case 1:
+                switch (akun) {
+                    case 1:
+                        akunSilver1.show();
                         break;
                     case 2:
-                        authenticate(akunSilver2.getID(), akunSilver2.getPin());
-                        akunSilver2.belanja(barang);
+                        akunSilver2.show();
                         break;
                     case 3:
-                        authenticate(akunSilver3.getID(), akunSilver3.getPin());
-                        akunSilver3.belanja(barang);
+                        akunSilver3.show();
                         break;
                     case 4:
-                        authenticate(akunSilver4.getID(), akunSilver4.getPin());
-                        akunSilver4.belanja(barang);
+                        akunSilver4.show();
                         break;
                     case 5:
-                        authenticate(akunSilver5.getID(), akunSilver5.getPin());
-                        akunSilver5.belanja(barang);
+                        akunSilver5.show();
                         break;
 
                 }
@@ -309,24 +367,19 @@ public class Main {
             case 2:
                 switch (akun) {
                     case 1:
-                        authenticate(akunGold1.getID(), akunGold1.getPin());
-                        akunGold1.belanja(barang);
+                        akunGold1.show();
                         break;
                     case 2:
-                        authenticate(akunGold2.getID(), akunGold2.getPin());
-                        akunGold2.belanja(barang);
+                        akunGold2.show();
                         break;
                     case 3:
-                        authenticate(akunGold3.getID(), akunGold3.getPin());
-                        akunGold3.belanja(barang);
+                        akunGold3.show();
                         break;
                     case 4:
-                        authenticate(akunGold4.getID(), akunGold4.getPin());
-                        akunGold4.belanja(barang);
+                        akunGold4.show();
                         break;
                     case 5:
-                        authenticate(akunGold5.getID(), akunGold5.getPin());
-                        akunGold5.belanja(barang);
+                        akunGold5.show();
                         break;
 
                 }
@@ -334,53 +387,78 @@ public class Main {
             case 3:
                 switch (akun) {
                     case 1:
-                        authenticate(akunPlatinum1.getID(), akunPlatinum1.getPin());
-                        akunPlatinum1.belanja(barang);
+                        akunPlatinum1.show();
                         break;
                     case 2:
-                        authenticate(akunPlatinum2.getID(), akunPlatinum2.getPin());
-                        akunPlatinum2.belanja(barang);
+                        akunPlatinum2.show();
                         break;
                     case 3:
-                        authenticate(akunPlatinum3.getID(), akunPlatinum3.getPin());
-                        akunPlatinum3.belanja(barang);
+                        akunPlatinum3.show();
                         break;
                     case 4:
-                        authenticate(akunPlatinum4.getID(), akunPlatinum4.getPin());
-                        akunPlatinum4.belanja(barang);
+                        akunPlatinum4.show();
                         break;
                     case 5:
-                        authenticate(akunPlatinum5.getID(), akunPlatinum5.getPin());
-                        akunPlatinum5.belanja(barang);
+                        akunPlatinum5.show();
                         break;
 
                 }
                 break;
 
         }
-
     }
 
-    static void authenticate(String ID, String PIN) {
+    static boolean authenticate(String ID, String PIN, Akun.Member member) {
         Scanner than = new Scanner(System.in);
         int attempts = 0;
 
         while (attempts < 3) {
-            System.out.print("Enter ID: ");
+            System.out.println("Konfirmasi pembayaran");
+            System.out.print("ID: ");
             String id = than.nextLine();
 
-            System.out.print("Enter PIN: ");
+            System.out.print("PIN: ");
             String pin = than.nextLine();
 
-            if (id.equals(ID) && pin.equals(PIN)) {
-                System.out.println("Autentifikasi berhasil!");
-                return;
-            } else {
-                System.out.println("Autentifikasi gagal. Silahkan coba lagi.");
-                attempts++;
+            switch (member) {
+                case SILVER:
+                    if (id.equals("426" + ID) && pin.equals(PIN)) {
+                        System.out.println("Autentifikasi berhasil!");
+                        return true;
+                    } else {
+                        System.out.println("Autentifikasi gagal. Silahkan coba lagi.\n");
+                        attempts++;
+                    }
+
+                    break;
+                case GOLD:
+                    if (id.equals("591" + ID) && pin.equals(PIN)) {
+                        System.out.println("Autentifikasi berhasil!");
+                        return true;
+                    } else {
+                        System.out.println("Autentifikasi gagal. Silahkan coba lagi.\n");
+                        attempts++;
+                    }
+
+                    break;
+                case PLATINUM:
+                    if (id.equals("772" + ID) && pin.equals(PIN)) {
+                        System.out.println("Autentifikasi berhasil!");
+                        return true;
+                    } else {
+                        System.out.println("Autentifikasi gagal. Silahkan coba lagi.\n");
+                        attempts++;
+                    }
+
+                    break;
+
+                default:
+                    break;
             }
+
         }
 
         System.out.println("Akun diblokir. Silahkan hubungi customer support.");
+        return false;
     }
 }

@@ -66,12 +66,29 @@ public class Akun {
         if (saldo < 20000) {
             System.err.println("GAGAL!\nSaldo anda kurang dari Rp 20.000\nSilahkan top up saldo anda terlebih dahulu!");
         } else {
+            double discount = 1;
+            double cashback = 0;
+            switch (member) {
+                case SILVER:
+                    discount = 0.97;
+                    break;
+                case GOLD:
+                    discount = 0.95;
+                    cashback = 0.02;
+                    break;
+                case PLATINUM:
+                    discount = 0.93;
+                    cashback = 0.03;
+                    break;
+                default:
+                    break;
+            }
             switch (pilih) {
                 case 1:
                     if (saldo < 1_000_000_000) {
                         System.err.println("GAGAL!\nSaldo anda kurang");
                     } else {
-                        this.saldo -= 1_000_000_000;
+                        this.saldo -= (1_000_000_000 * discount) + (1_000_000_000 * cashback);
                         System.out.println("Berhasil!\nTerimakasih telah berbelanja di Laris Store!");
 
                     }
