@@ -6,6 +6,8 @@ public class Main {
     public static void main(String[] args) throws NoSuchElementException {
         Scanner than = new Scanner(System.in);
         boolean isRunning = true;
+        String nama, alamat, nomorAnggota;
+        int batasPinjam, batasWaktu;
         LinkedList<AnggotaPerpustakaan> anggota = new LinkedList<AnggotaPerpustakaan>();
 
         while (isRunning) {
@@ -14,28 +16,82 @@ public class Main {
             System.out.println("2. Tambah Anggota Premium");
             System.out.println("3. Tampilkan Semua Anggota");
             System.out.println("4. Keluar");
-            System.out.print("Pilih Menu: ");
+            System.out.print("Pilih menu: ");
             int pilihMenu = than.nextInt();
             than.nextLine();
+            System.out.println(pilihMenu);
 
             switch (pilihMenu) {
                 case 1:
-                    anggota.addLast(tambahAnggota(jenisAnggota.BIASA));
+                    // anggota.addLast(tambahAnggota(jenisAnggota.BIASA));
+                    System.out.print("Masukkan nama anggota: ");
+                    nama = than.nextLine();
+                    System.out.println(nama);
+                    System.out.print("Masukkan alamat anggota: ");
+                    alamat = than.nextLine();
+                    System.out.println(alamat);
+                    System.out.print("Masukkan nomor anggota: ");
+                    nomorAnggota = than.nextLine();
+                    System.out.println(nomorAnggota);
+                    System.out.print("Masukkan batas peminjaman: ");
+                    batasPinjam = than.nextInt();
+                    than.nextLine();
+                    System.out.println(batasPinjam);
+                    System.out.print("Masukkan batas waktu: ");
+                    batasWaktu = than.nextInt();
+                    than.nextLine();
+                    System.out.println(batasWaktu);
 
+                    AnggotaPerpustakaan anggotaBiasa = new AnggotaPerpustakaan(nama, alamat, nomorAnggota,
+                            jenisAnggota.BIASA,
+                            batasPinjam,
+                            batasWaktu);
+
+                    anggota.addLast(anggotaBiasa);
+                    System.out.println("Anggota Biasa berhasil ditambahkan.");
+                    System.out.println();
                     break;
                 case 2:
-                    anggota.addLast(tambahAnggota(jenisAnggota.PREMIUM));
+                    // anggota.addLast(tambahAnggota(jenisAnggota.PREMIUM));
+                    System.out.print("Masukkan nama anggota: ");
+                    nama = than.nextLine();
+                    System.out.println(nama);
+                    System.out.print("Masukkan alamat anggota: ");
+                    alamat = than.nextLine();
+                    System.out.println(alamat);
+                    System.out.print("Masukkan nomor anggota: ");
+                    nomorAnggota = than.nextLine();
+                    System.out.println(nomorAnggota);
+                    System.out.print("Masukkan batas peminjaman: ");
+                    batasPinjam = than.nextInt();
+                    than.nextLine();
+                    System.out.println(batasPinjam);
+                    System.out.print("Masukkan batas waktu: ");
+                    batasWaktu = than.nextInt();
+                    than.nextLine();
+                    System.out.println(batasWaktu);
 
+                    AnggotaPerpustakaan anggotaPremium = new AnggotaPerpustakaan(nama, alamat, nomorAnggota,
+                            jenisAnggota.PREMIUM,
+                            batasPinjam,
+                            batasWaktu);
+
+                    anggota.addLast(anggotaPremium);
+                    System.out.println("Anggota Premium berhasil ditambahkan.");
+                    System.out.println();
                     break;
                 case 3:
                     System.out.println("Daftar Semua Anggota: ");
                     for (AnggotaPerpustakaan i : anggota) {
                         i.show();
                     }
+                    System.out.println();
+                    System.out.println();
 
                     break;
                 case 4:
                     System.out.println("Terima kasih!");
+                    isRunning = false;
                     break;
 
                 default:
@@ -47,24 +103,24 @@ public class Main {
     }
 
     static AnggotaPerpustakaan tambahAnggota(jenisAnggota jenis) throws NoSuchElementException {
-        Scanner nath = new Scanner(System.in);
+        Scanner than = new Scanner(System.in);
 
         System.out.print("Masukkan nama anggota: ");
-        String nama = nath.nextLine();
+        String nama = than.nextLine();
         System.out.print("Masukkan alamat anggota: ");
-        String alamat = nath.nextLine();
+        String alamat = than.nextLine();
         System.out.print("Masukkan nomor anggota: ");
-        String nomorAnggota = nath.nextLine();
+        String nomorAnggota = than.nextLine();
         System.out.print("Masukkan batas peminjaman: ");
-        int batasPinjam = nath.nextInt();
-        nath.nextLine();
+        int batasPinjam = than.nextInt();
+        than.nextLine();
         System.out.print("Masukkan batas waktu: ");
-        int batasWaktu = nath.nextInt();
-        nath.nextLine();
+        int batasWaktu = than.nextInt();
+        than.nextLine();
 
         AnggotaPerpustakaan anggota = new AnggotaPerpustakaan(nama, alamat, nomorAnggota, jenis, batasPinjam,
                 batasWaktu);
-        nath.close();
+        than.close();
         return anggota;
     }
 }
