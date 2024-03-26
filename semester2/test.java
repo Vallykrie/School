@@ -23,12 +23,12 @@ class DoublyNode {
     }
 }
 
-class DoublyLinkedList {
+class CircularDoublyLinkedList {
     DoublyNode head;
     DoublyNode tail;
     int size;
 
-    public DoublyLinkedList() {
+    public CircularDoublyLinkedList() {
         this.head = null;
         this.tail = null;
         this.size = 0;
@@ -43,11 +43,30 @@ class DoublyLinkedList {
     }
 
     public void printToLast() {
-        DoublyNode current = head;
-        while (current != null) {
-            System.out.print(current.data + (current.next != null ? " -- " : ""));
-            current = current.next;
+        if (isEmpty()) {
+            System.out.println("List is empty");
+            return;
         }
+
+        DoublyNode current = head;
+        do {
+            System.out.print(current.data + (current.next != head ? " -- " : ""));
+            current = current.next;
+        } while (current != head);
+        System.out.println();
+    }
+
+    public void printToFirst() {
+        if (isEmpty()) {
+            System.out.println("List is empty");
+            return;
+        }
+
+        DoublyNode current = tail;
+        do {
+            System.out.print(current.data + (current.prev != tail ? " -- " : ""));
+            current = current.prev;
+        } while (current != tail);
         System.out.println();
     }
 
@@ -55,30 +74,29 @@ class DoublyLinkedList {
         DoublyNode newNode = new DoublyNode(data);
         if (isEmpty()) {
             head = tail = newNode;
+            newNode.next = newNode;
+            newNode.prev = newNode;
         } else {
-            head.prev = newNode;
             newNode.next = head;
+            newNode.prev = tail;
+            head.prev = newNode;
+            tail.next = newNode;
             head = newNode;
         }
         size++;
-    }
-
-    public void printToFirst() {
-        DoublyNode current = tail;
-        while (current != null) {
-            System.out.print(current.data + (current.prev != null ? " -- " : ""));
-            current = current.prev;
-        }
-        System.out.println();
     }
 
     public void addLast(String data) {
         DoublyNode newNode = new DoublyNode(data);
         if (isEmpty()) {
             head = tail = newNode;
+            newNode.next = newNode;
+            newNode.prev = newNode;
         } else {
-            tail.next = newNode;
+            newNode.next = head;
             newNode.prev = tail;
+            head.prev = newNode;
+            tail.next = newNode;
             tail = newNode;
         }
         size++;
@@ -90,7 +108,8 @@ class DoublyLinkedList {
                 head = tail = null;
             } else {
                 head = head.next;
-                head.prev = null;
+                head.prev = tail;
+                tail.next = head;
             }
             size--;
         }
@@ -102,7 +121,8 @@ class DoublyLinkedList {
                 head = tail = null;
             } else {
                 tail = tail.prev;
-                tail.next = null;
+                tail.next = head;
+                head.prev = tail;
             }
             size--;
         }
@@ -244,7 +264,7 @@ public class test {
     // Jangan ubah
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        DoublyLinkedList doublyLinkedList = new DoublyLinkedList();
+        CircularDoublyLinkedList doublyLinkedList = new CircularDoublyLinkedList();
 
         while (true) {
             String command = scanner.next();
