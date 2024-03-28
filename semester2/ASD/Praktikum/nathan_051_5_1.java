@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class nathan_051_5_2 {
+public class nathan_051_5_1 {
     public static void main(String[] args) {
         Scanner than = new Scanner(System.in);
         String kartu = than.nextLine();
@@ -29,19 +29,9 @@ public class nathan_051_5_2 {
     }
 }
 
-class NodeQueue {
-    char data;
-    NodeQueue next;
-
-    public NodeQueue(char data) {
-        this.data = data;
-        this.next = null;
-    }
-}
-
-class Queue {
-    NodeQueue head, tail;
-    int size;
+class PQ {
+    NodePQ head, tail;
+    int size = 0;
 
     public int size() {
         return size;
@@ -51,13 +41,22 @@ class Queue {
         return size == 0;
     }
 
-    public void enqueue(char data) {
-        NodeQueue input = new NodeQueue(data);
+    public void enqueue(int data, int priority) {
+        NodePQ input = new NodePQ(data, priority);
         if (isEmpty()) {
-            tail = head = input;
+            head = tail = input;
         } else {
-            tail.next = input;
-            tail = input;
+            if (input.priority > head.priority) {
+                input.next = head;
+                head = input;
+            } else {
+                NodePQ pointer = head;
+                while (pointer.next != null && pointer.next.priority >= input.priority) {
+                    pointer = pointer.next;
+                }
+                input.next = pointer.next;
+                pointer.next = input;
+            }
         }
         size++;
     }
@@ -69,16 +68,25 @@ class Queue {
         }
     }
 
-    public void peek() {
-        System.out.println(head.data);
-    }
-
     public void print() {
-        NodeQueue pointer = head;
+        NodePQ pointer = head;
         while (pointer != null) {
-            System.out.print(pointer.data);
+            System.out.print(pointer.data + " ");
             pointer = pointer.next;
         }
         System.out.println();
     }
+
+}
+
+class NodePQ {
+    int data, priority;
+    NodePQ next;
+
+    public NodePQ(int data, int priority) {
+        this.data = data;
+        this.priority = priority;
+        this.next = null;
+    }
+
 }

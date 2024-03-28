@@ -76,9 +76,9 @@ public class Main {
                     System.out.println("Daftar Semua Anggota: ");
                     for (AnggotaPerpustakaan i : anggota) {
                         i.show();
+                        System.out.println();
                     }
                     // System.out.println();
-                    System.out.println();
 
                     break;
                 case 4:
