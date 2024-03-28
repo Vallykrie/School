@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.InputMismatchException;
 import java.util.LinkedList;
 import java.util.NoSuchElementException;
 
@@ -16,31 +17,29 @@ public class Main {
             System.out.println("2. Tambah Anggota Premium");
             System.out.println("3. Tampilkan Semua Anggota");
             System.out.println("4. Keluar");
-            System.out.print("Pilih menu: ");
+            System.out.println("Pilih menu: ");
             int pilihMenu = than.nextInt();
-            than.nextLine();
-            System.out.println(pilihMenu);
+            if (than.hasNextLine()) {
+                than.nextLine();
+
+            } else {
+            }
 
             switch (pilihMenu) {
                 case 1:
                     // anggota.addLast(tambahAnggota(jenisAnggota.BIASA));
-                    System.out.print("Masukkan nama anggota: ");
+                    System.out.println("Masukkan nama anggota: ");
                     nama = than.nextLine();
-                    System.out.println(nama);
-                    System.out.print("Masukkan alamat anggota: ");
+                    System.out.println("Masukkan alamat anggota: ");
                     alamat = than.nextLine();
-                    System.out.println(alamat);
-                    System.out.print("Masukkan nomor anggota: ");
+                    System.out.println("Masukkan nomor anggota: ");
                     nomorAnggota = than.nextLine();
-                    System.out.println(nomorAnggota);
-                    System.out.print("Masukkan batas peminjaman: ");
+                    System.out.println("Masukkan batas peminjaman: ");
                     batasPinjam = than.nextInt();
                     than.nextLine();
-                    System.out.println(batasPinjam);
-                    System.out.print("Masukkan batas waktu: ");
+                    System.out.println("Masukkan batas waktu: ");
                     batasWaktu = than.nextInt();
                     than.nextLine();
-                    System.out.println(batasWaktu);
 
                     AnggotaPerpustakaan anggotaBiasa = new AnggotaPerpustakaan(nama, alamat, nomorAnggota,
                             jenisAnggota.BIASA,
@@ -53,28 +52,21 @@ public class Main {
                     break;
                 case 2:
                     // anggota.addLast(tambahAnggota(jenisAnggota.PREMIUM));
-                    System.out.print("Masukkan nama anggota: ");
+                    System.out.println("Masukkan nama anggota: ");
                     nama = than.nextLine();
-                    System.out.println(nama);
-                    System.out.print("Masukkan alamat anggota: ");
+                    System.out.println("Masukkan alamat anggota: ");
                     alamat = than.nextLine();
-                    System.out.println(alamat);
-                    System.out.print("Masukkan nomor anggota: ");
+                    System.out.println("Masukkan nomor anggota: ");
                     nomorAnggota = than.nextLine();
-                    System.out.println(nomorAnggota);
-                    System.out.print("Masukkan batas peminjaman: ");
-                    batasPinjam = than.nextInt();
-                    than.nextLine();
-                    System.out.println(batasPinjam);
-                    System.out.print("Masukkan batas waktu: ");
-                    batasWaktu = than.nextInt();
-                    than.nextLine();
-                    System.out.println(batasWaktu);
+                    // System.out.println("Masukkan batas peminjaman: ");
+                    // batasPinjam = than.nextInt();
+                    // than.nextLine();
+                    // System.out.println("Masukkan batas waktu: ");
+                    // batasWaktu = than.nextInt();
+                    // than.nextLine();
 
                     AnggotaPerpustakaan anggotaPremium = new AnggotaPerpustakaan(nama, alamat, nomorAnggota,
-                            jenisAnggota.PREMIUM,
-                            batasPinjam,
-                            batasWaktu);
+                            jenisAnggota.PREMIUM);
 
                     anggota.addLast(anggotaPremium);
                     System.out.println("Anggota Premium berhasil ditambahkan.");
@@ -85,7 +77,7 @@ public class Main {
                     for (AnggotaPerpustakaan i : anggota) {
                         i.show();
                     }
-                    System.out.println();
+                    // System.out.println();
                     System.out.println();
 
                     break;
@@ -96,33 +88,36 @@ public class Main {
 
                 default:
                     System.out.println("Pilihan tidak valid!");
+                    System.out.println();
                     break;
             }
         }
         than.close();
     }
 
-    static AnggotaPerpustakaan tambahAnggota(jenisAnggota jenis) throws NoSuchElementException {
-        Scanner than = new Scanner(System.in);
+    // static AnggotaPerpustakaan tambahAnggota(jenisAnggota jenis) throws
+    // NoSuchElementException {
+    // Scanner than = new Scanner(System.in);
 
-        System.out.print("Masukkan nama anggota: ");
-        String nama = than.nextLine();
-        System.out.print("Masukkan alamat anggota: ");
-        String alamat = than.nextLine();
-        System.out.print("Masukkan nomor anggota: ");
-        String nomorAnggota = than.nextLine();
-        System.out.print("Masukkan batas peminjaman: ");
-        int batasPinjam = than.nextInt();
-        than.nextLine();
-        System.out.print("Masukkan batas waktu: ");
-        int batasWaktu = than.nextInt();
-        than.nextLine();
+    // System.out.println("Masukkan nama anggota: ");
+    // String nama = than.nextLine();
+    // System.out.println("Masukkan alamat anggota: ");
+    // String alamat = than.nextLine();
+    // System.out.println("Masukkan nomor anggota: ");
+    // String nomorAnggota = than.nextLine();
+    // System.out.println("Masukkan batas peminjaman: ");
+    // int batasPinjam = than.nextInt();
+    // than.nextLine();
+    // System.out.println("Masukkan batas waktu: ");
+    // int batasWaktu = than.nextInt();
+    // than.nextLine();
 
-        AnggotaPerpustakaan anggota = new AnggotaPerpustakaan(nama, alamat, nomorAnggota, jenis, batasPinjam,
-                batasWaktu);
-        than.close();
-        return anggota;
-    }
+    // AnggotaPerpustakaan anggota = new AnggotaPerpustakaan(nama, alamat,
+    // nomorAnggota, jenis, batasPinjam,
+    // batasWaktu);
+    // than.close();
+    // return anggota;
+    // }
 }
 
 enum jenisAnggota {
@@ -144,11 +139,26 @@ class AnggotaPerpustakaan {
         this.batasWaktu = batasWaktu;
     }
 
+    AnggotaPerpustakaan(String nama, String alamat, String nomorAnggota, jenisAnggota jenis) {
+        this.nama = nama;
+        this.alamat = alamat;
+        this.nomorAnggota = nomorAnggota;
+        this.jenis = jenis;
+
+    }
+
     public void show() {
-        System.out.println("Nama: " + nama);
-        System.out.println("Alamat: " + alamat);
-        System.out.println("Nomor Anggota: " + nomorAnggota);
-        System.out.println("Batas Peminjaman: " + batasPinjam);
-        System.out.println("Batas Waktu: " + batasWaktu);
+        if (jenis == jenisAnggota.BIASA) {
+            System.out.println("Nama: " + nama);
+            System.out.println("Alamat: " + alamat);
+            System.out.println("Nomor Anggota: " + nomorAnggota);
+            System.out.println("Batas Peminjaman: " + batasPinjam);
+            System.out.println("Batas Waktu: " + batasWaktu);
+
+        } else {
+            System.out.println("Nama: " + nama);
+            System.out.println("Alamat: " + alamat);
+            System.out.println("Nomor Anggota: " + nomorAnggota);
+        }
     }
 }

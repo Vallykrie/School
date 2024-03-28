@@ -1,7 +1,8 @@
+package Praktikum;
+
 import java.util.Scanner;
 
-public class test {
-
+public class nathan_051_5_2 {
     public static void main(String[] args) {
         Scanner than = new Scanner(System.in);
         String kartu = than.nextLine();
