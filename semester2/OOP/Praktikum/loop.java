@@ -3,7 +3,7 @@ package OOP.Praktikum;
 public class loop {
     public static void main(String[] args) {
         // untuk membantu mengetik tabel praktikum
-        int jumlah = 500;
+        int jumlah = 100;
         int i = 0;
         while (jumlah-- > 0) {
             i++;
