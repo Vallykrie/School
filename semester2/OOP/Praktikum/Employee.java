@@ -7,6 +7,10 @@ public class Employee {
     private double salary;
     private Date hireday;
 
+    public Employee(String name) {
+        this.name = name;
+    }
+
     public Employee(String name, double salary, int year, int month, int day) {
         this.name = name;
         this.salary = salary;
