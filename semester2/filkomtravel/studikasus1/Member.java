@@ -1,14 +1,14 @@
 package filkomtravel.studikasus1;
 
-public class Member extends User{
+public class Member extends User {
     private String tanggalLahir;
     private String status = "member";
     private boolean isMember = true;
-    
+
     public Member(String username, String password, String email, String namaLengkap) {
         super(username, password, email, namaLengkap);
     }
-    
+
     @Override
     public void viewProfile() {
         System.out.println("Nama Lengkap\t: " + getNamaLengkap());

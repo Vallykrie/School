@@ -1,8 +1,6 @@
-/**
- * test
- */
-public class test {
+package ASD.UTP;
 
+public class test {
     public static void main(String[] args) {
         System.out.println("Hello World");
     }
