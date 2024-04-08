@@ -10,7 +10,7 @@ import java.text.DecimalFormatSymbols;
 import java.text.DecimalFormat;
 import java.util.Scanner;
 
-public class OjekOnlinePalingUpdate {
+public class OjekOnlineRevisiSeriusBangetFINAL {
 
     // Global Declare
     private static String pilihan = "";

@@ -2,6 +2,20 @@
   "version": "0.2.0",
   "configurations": [
     {
+      "type": "java",
+      "name": "test",
+      "request": "launch",
+      "mainClass": "test",
+      "projectName": "School_e414736b"
+    },
+    {
+      "type": "java",
+      "name": "OjekOnlineRevisiSeriusBangetFINAL",
+      "request": "launch",
+      "mainClass": "Driver.OjekOnlineRevisiSeriusBangetFINAL",
+      "projectName": "School_e414736b"
+    },
+    {
       "name": "C/C++ Runner: Debug Session",
       "type": "cppdbg",
       "request": "launch",
