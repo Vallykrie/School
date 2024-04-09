@@ -3,6 +3,20 @@
   "configurations": [
     {
       "type": "java",
+      "name": "MainKue",
+      "request": "launch",
+      "mainClass": "OOP.Praktikum.polymorfisme.MainKue",
+      "projectName": "School_e414736b"
+    },
+    {
+      "type": "java",
+      "name": "loop",
+      "request": "launch",
+      "mainClass": "OOP.Praktikum.loop",
+      "projectName": "School_e414736b"
+    },
+    {
+      "type": "java",
       "name": "Main",
       "request": "launch",
       "mainClass": "OOP.Praktikum.polymorfisme.Main",

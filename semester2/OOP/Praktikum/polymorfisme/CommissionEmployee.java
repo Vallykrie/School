@@ -1,11 +1,14 @@
 package OOP.Praktikum.polymorfisme;
 
+import java.time.LocalDate;
+
 public class CommissionEmployee extends Employee {
     private double grossSales;// penjualan per minggu
     private double commissionRate;// komisi
 
-    public CommissionEmployee(String name, String noKTP, double sales, double rate) {
-        super(name, noKTP);
+    public CommissionEmployee(String name, String noKTP, LocalDate birthDate, int produksiBarang,
+            double upahPerProduksi, double sales, double rate) {
+        super(name, noKTP, birthDate, produksiBarang, upahPerProduksi);
         setGrossSales(sales);
         setCommissionRate(rate);
     }

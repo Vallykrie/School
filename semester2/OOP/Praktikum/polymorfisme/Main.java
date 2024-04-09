@@ -1,18 +1,19 @@
 package OOP.Praktikum.polymorfisme;
 
+import java.time.LocalDate;
+
 public class Main {
     public static void main(String[] args) {
-        SalariedEmployee salariedEmployee = new SalariedEmployee("Daniel", "135", 800.00);
-        HourlyEmployee hourlyEmployee = new HourlyEmployee("Karina", "234", 16.75, 40);
-        CommissionEmployee commissionEmployee = new CommissionEmployee("Keanu", "145", 10000, .06);
-        BasePlusCommissionEmployee basePlusCommissionEmployee = new BasePlusCommissionEmployee("Bondan", "234", 5000,
+        LocalDate birthDate = LocalDate.of(1999, 5, 11);
+        LocalDate dateNow = LocalDate.now();
+
+        SalariedEmployee salariedEmployee = new SalariedEmployee("Daniel", "135", birthDate, 10, 100, 800.00);
+        HourlyEmployee hourlyEmployee = new HourlyEmployee("Karina", "234", birthDate, 20, 55, 16.75, 40);
+        CommissionEmployee commissionEmployee = new CommissionEmployee("Keanu", "145", birthDate, 100, 20, 10000, .06);
+        BasePlusCommissionEmployee basePlusCommissionEmployee = new BasePlusCommissionEmployee("Bondan", "234",
+                dateNow, 50, 50, 5000,
                 .04, 300);
-        System.out.println("Employees diproses secara terpisah:\n");
-        System.out.printf("%s\n%s: $%,.2f\n\n", salariedEmployee, "pendapatan: ", salariedEmployee.earnings());
-        System.out.printf("%s\n%s: $%,.2f\n\n", hourlyEmployee, "pendapatan: ", hourlyEmployee.earnings());
-        System.out.printf("%s\n%s: $%,.2f\n\n", commissionEmployee, "pendapatan: ", commissionEmployee.earnings());
-        System.out.printf("%s\n%s: $%,.2f\n\n", basePlusCommissionEmployee, "earned",
-                basePlusCommissionEmployee.earnings());
+
         Employee[] employees = new Employee[4];
         employees[0] = salariedEmployee;
         employees[1] = hourlyEmployee;
@@ -21,15 +22,15 @@ public class Main {
         System.out.println("Employees diproses secara polimorfisme:\n");
         for (Employee currentEmployee : employees) {
             System.out.println(currentEmployee);
-            if (currentEmployee instanceof BasePlusCommissionEmployee) {
-                BasePlusCommissionEmployee employee = (BasePlusCommissionEmployee) currentEmployee;
-                employee.setBaseSalary(1.10 * employee.getBaseSalary());
-                System.out.printf("Gaji pokok setelah dinaikkan 10%% : $%,.2f\n", employee.getBaseSalary());
+            double upahTambahan = currentEmployee.upahTambahan();
+            System.out.println("upah tambahan: " + upahTambahan);
+            if (currentEmployee.getBirthDate().getDayOfMonth() == dateNow.getDayOfMonth()
+                    && currentEmployee.getBirthDate().getMonth() == dateNow.getMonth()) {
+                System.out.println("Selamat Ulang Tahun! Anda mendapatkan bonus $100,000");
+                System.out.printf("pendapatan: $%,.2f\n\n", currentEmployee.earnings() + 100_000 + upahTambahan);
+            } else {
+                System.out.printf("pendapatan: $%,.2f\n\n", currentEmployee.earnings() + upahTambahan);
             }
-            System.out.printf("pendapatan: $%,.2f\n\n", currentEmployee.earnings());
-        }
-        for (int j = 0; j < employees.length; j++) {
-            System.out.printf("Employee %d = %s\n", j, employees[j].getClass().getName());
         }
     }
 }

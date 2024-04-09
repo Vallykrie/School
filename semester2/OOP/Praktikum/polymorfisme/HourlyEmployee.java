@@ -1,12 +1,14 @@
 package OOP.Praktikum.polymorfisme;
 
+import java.time.LocalDate;
+
 public class HourlyEmployee extends Employee {
     private double wage; // upah per jam
     private double hours; // jumlah jam tiap minggu
 
-    public HourlyEmployee(String name, String noKTP,
+    public HourlyEmployee(String name, String noKTP, LocalDate birthDate, int produksiBarang, double upahPerProduksi,
             double hourlyWage, double hoursWorked) {
-        super(name, noKTP);
+        super(name, noKTP, birthDate, produksiBarang, upahPerProduksi);
         setWage(hourlyWage);
         setHours(hoursWorked);
     }
@@ -37,6 +39,7 @@ public class HourlyEmployee extends Employee {
 
     public String toString() {
         return String.format(
-                "Hourly employee:" + super.toString() + "\nhourly wage" + getWage() + "\nhours worked:" + getHours());
+                "Hourly employee: " + super.toString() + "\nhourly wage " + getWage() + "\nhours worked: "
+                        + getHours());
     }
 }

@@ -1,10 +1,13 @@
 package OOP.Praktikum.polymorfisme;
 
+import java.time.LocalDate;
+
 public class SalariedEmployee extends Employee {
     private double weeklySalary; // gaji/minggu
 
-    public SalariedEmployee(String name, String noKTP, double salary) {
-        super(name, noKTP);
+    public SalariedEmployee(String name, String noKTP, LocalDate birthDate, int produksiBarang, double upahPerProduksi,
+            double salary) {
+        super(name, noKTP, birthDate, produksiBarang, upahPerProduksi);
         setWeeklySalary(salary);
     }
 
@@ -23,6 +26,6 @@ public class SalariedEmployee extends Employee {
     public String toString() {
         return String.format("Salaried employee: " +
                 super.toString() +
-                "\nweekly salary:" + getWeeklySalary());
+                "\nweekly salary: " + getWeeklySalary());
     }
 }
