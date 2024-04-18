@@ -1,106 +1,64 @@
 import java.util.Scanner;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 
 public class test {
+
     public static void main(String[] args) {
+
         Scanner than = new Scanner(System.in);
-        int Gua = than.nextInt();
+        int input = than.nextInt();
         than.nextLine();
-        double[] total = new double[Gua];
-
-        for (int i = 0; i < Gua; i++) {
-            String ukir = than.nextLine();
-            String[] ukirSplit = ukir.split(" ");
-            int banyakUkiran = ukirSplit.length;
-            PQ pq = new PQ();
-
-            for (int j = 0; j < banyakUkiran; j++) {
-                pq.enqueue(j, Integer.parseInt(ukirSplit[j]));
+        for (int i = 0; i < input; i++) {
+            String nama = than.nextLine();
+            int umur = than.nextInt();
+            than.nextLine();
+            String NIK = than.nextLine();
+            int jumlah = than.nextInt();
+            if (than.hasNextLine()) {
+                than.nextLine();
             }
 
-            int maxUkir = pq.dequeue();
-            total[i] = maxUkir;
-            for (int j = 0; j < banyakUkiran - 1; j++) {
-                int tmp = pq.dequeue();
-                if (tmp == maxUkir) {
-                    total[i] += tmp;
-                } else
-                    break;
-
+            double disc = 1;
+            if (jumlah > 10) {
+                disc = 0.65;
+            } else if (jumlah > 5) {
+                disc = 0.8;
+            } else if (jumlah > 2) {
+                disc = 0.9;
             }
-
+            print(nama, umur, NIK, jumlah, disc);
         }
-
-        double ans = 0;
-        for (int i = 0; i < Gua; i++) {
-            ans += total[i];
-        }
-        ans /= Gua;
-
-        System.out.printf("%.2f", ans);
-    }
-}
-
-class PQ {
-    NodePQ head, tail;
-    int size = 0;
-
-    public int size() {
-        return size;
+        System.out.println("--------------------------------------------------");
     }
 
-    public boolean isEmpty() {
-        return size == 0;
-    }
+    static void print(String nama, int umur, String NIK, int jumlah, double disc) {
+        // Price Formats
+        DecimalFormatSymbols symbols = new DecimalFormatSymbols();
+        symbols.setGroupingSeparator('.');
+        symbols.setDecimalSeparator(',');
+        DecimalFormat df = new DecimalFormat("Rp#,###.00", symbols);
 
-    public void enqueue(int data, int priority) {
-        NodePQ input = new NodePQ(data, priority);
-        if (isEmpty()) {
-            head = tail = input;
+        if (disc == 1) {
+            System.out.println("--------------------------------------------------");
+            System.out.println("Nama Tamu: " + nama);
+            System.out.println("Harga Asli: " + df.format(jumlah * 500_000));
+            System.out.println("Tidak mendapatkan diskon");
+            System.out.println("Total Tagihan: " + df.format(jumlah * 500_000));
         } else {
-            if (input.priority > head.priority) {
-                input.next = head;
-                head = input;
-            } else {
-                NodePQ pointer = head;
-                while (pointer.next != null && pointer.next.priority >= input.priority) {
-                    pointer = pointer.next;
-                }
-                input.next = pointer.next;
-                pointer.next = input;
+            System.out.println("--------------------------------------------------");
+            System.out.println("Nama Tamu: " + nama);
+            System.out.println("Harga Asli: " + df.format(jumlah * 500_000));
+            if (disc == 0.65) {
+                System.out.println("Diskon Diterima: 35%");
+            } else if (disc == 0.8) {
+                System.out.println("Diskon Diterima: 20%");
+            } else if (disc == 0.9) {
+                System.out.println("Diskon Diterima: 10%");
             }
+            System.out.println("Potongan Harga: " + df.format((jumlah * 500_000) * (1 - disc)));
+            System.out.println("Total Tagihan: " + df.format((jumlah * 500_000) * disc));
+
         }
-        size++;
     }
-
-    public int dequeue() {
-        if (!isEmpty()) {
-            int tmp = head.priority;
-            head = head.next;
-            size--;
-            return tmp;
-        }
-        return 0;
-    }
-
-    public void print() {
-        NodePQ pointer = head;
-        while (pointer != null) {
-            System.out.print(pointer.data + " ");
-            pointer = pointer.next;
-        }
-        System.out.println();
-    }
-
-}
-
-class NodePQ {
-    int data, priority;
-    NodePQ next;
-
-    public NodePQ(int data, int priority) {
-        this.data = data;
-        this.priority = priority;
-        this.next = null;
-    }
-
 }
