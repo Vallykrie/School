@@ -5,6 +5,27 @@
       "type": "java",
       "name": "Main",
       "request": "launch",
+      "mainClass": "Main",
+      "projectName": "School_e414736b"
+    },
+    {
+      "type": "java",
+      "name": "nathan_051_6_2",
+      "request": "launch",
+      "mainClass": "nathan_051_6_2",
+      "projectName": "School_e414736b"
+    },
+    {
+      "type": "java",
+      "name": "MainBT",
+      "request": "launch",
+      "mainClass": "MainBT",
+      "projectName": "School_e414736b"
+    },
+    {
+      "type": "java",
+      "name": "Main",
+      "request": "launch",
       "mainClass": "filkomtravel.studikasus1.Main",
       "projectName": "School_e414736b"
     },
