@@ -3,6 +3,27 @@
   "configurations": [
     {
       "type": "java",
+      "name": "BinaryTree",
+      "request": "launch",
+      "mainClass": "ASD.Praktikum.BinaryTree",
+      "projectName": "School_e414736b"
+    },
+    {
+      "type": "java",
+      "name": "Labkomdas",
+      "request": "launch",
+      "mainClass": "OOP.Praktikum.Labkomdas",
+      "projectName": "School_e414736b"
+    },
+    {
+      "type": "java",
+      "name": "TestVehicle1",
+      "request": "launch",
+      "mainClass": "OOP.Praktikum.TestVehicle1",
+      "projectName": "School_e414736b"
+    },
+    {
+      "type": "java",
       "name": "MainAritmatika",
       "request": "launch",
       "mainClass": "OOP.Praktikum.MainAritmatika",

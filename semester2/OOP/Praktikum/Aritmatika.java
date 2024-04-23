@@ -15,4 +15,10 @@ public class Aritmatika {
         int nilai = a - b;
         System.out.println("nilai pengurangan adalah :" + nilai);
     }
+
+    public double hitungPembagian(double a, double b) {
+        double nilai = a / b;
+        System.out.println("nilai pembagian adalah :" + nilai);
+        return nilai;
+    }
 }

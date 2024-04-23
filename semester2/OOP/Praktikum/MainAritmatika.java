@@ -24,5 +24,6 @@ public class MainAritmatika {
         // memanggil method NONstatic harus melalui objek
         Aritmatika a = new Aritmatika();
         a.hitungPenjumlahan(value1, value2);
+        a.hitungPembagian(value1, value2);
     }
 }

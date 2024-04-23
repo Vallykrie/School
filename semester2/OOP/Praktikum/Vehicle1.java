@@ -1,11 +1,12 @@
 package OOP.Praktikum;
 
 public class Vehicle1 {
-    double load, maxLoad;
+    private double load;
+    private static final double maxLoad = 10000;
 
-    public Vehicle1(double max) {
-        this.maxLoad = max;
-    }
+    // public Vehicle1(double max) {
+    // this.maxLoad = max;
+    // }
 
     public double getLoad() {
         return this.load;
