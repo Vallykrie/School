@@ -3,6 +3,20 @@
   "configurations": [
     {
       "type": "java",
+      "name": "MainAritmatika",
+      "request": "launch",
+      "mainClass": "OOP.Praktikum.MainAritmatika",
+      "projectName": "School_e414736b"
+    },
+    {
+      "type": "java",
+      "name": "main",
+      "request": "launch",
+      "mainClass": "main",
+      "projectName": "School_e414736b"
+    },
+    {
+      "type": "java",
       "name": "Main",
       "request": "launch",
       "mainClass": "Main",
