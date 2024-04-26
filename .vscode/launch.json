@@ -3,6 +3,13 @@
   "configurations": [
     {
       "type": "java",
+      "name": "MainHT",
+      "request": "launch",
+      "mainClass": "MainHT",
+      "projectName": "School_e414736b"
+    },
+    {
+      "type": "java",
       "name": "BinaryTree",
       "request": "launch",
       "mainClass": "ASD.Praktikum.BinaryTree",
