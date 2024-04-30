@@ -3,6 +3,34 @@
   "configurations": [
     {
       "type": "java",
+      "name": "Main",
+      "request": "launch",
+      "mainClass": "OOP.Praktikum.BAB8.Main",
+      "projectName": "School_e414736b"
+    },
+    {
+      "type": "java",
+      "name": "Main",
+      "request": "launch",
+      "mainClass": "semester2.OOP.Praktikum.BAB8.Main",
+      "projectName": "School_e414736b"
+    },
+    {
+      "type": "java",
+      "name": "Rectangle",
+      "request": "launch",
+      "mainClass": "semester2.OOP.Praktikum.BAB8.Rectangle",
+      "projectName": "School_e414736b"
+    },
+    {
+      "type": "java",
+      "name": "nathan_051_7_2",
+      "request": "launch",
+      "mainClass": "ASD.Praktikum.nathan_051_7_2",
+      "projectName": "School_e414736b"
+    },
+    {
+      "type": "java",
       "name": "MainHT",
       "request": "launch",
       "mainClass": "MainHT",
