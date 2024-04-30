@@ -98,6 +98,9 @@ class BST {
         } else if (tahun > current.tahun) {
             temp.right = add(current.right, tahun, judul, penulis);
         }
+        // else if (tahun == current.tahun) {
+        // temp = new NodeBST(tahun, judul, penulis);
+        // }
         System.out.println("Data berhasil ditambahkan");
         return temp;
     }
