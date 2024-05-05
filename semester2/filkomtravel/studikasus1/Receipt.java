@@ -13,6 +13,7 @@ public class Receipt {
     private String[] tanggalSewa, jamSewa;
     private int jam;
     private double harga;
+    private static int nomorPesanan = 0;
 
     /**
      * Constructs a Receipt object with the specified rental information.
@@ -27,6 +28,7 @@ public class Receipt {
         this.jam = jam;
         this.harga = harga;
         this.jamSewa = jamSewa;
+        nomorPesanan++;
     }
 
     /**
@@ -34,20 +36,18 @@ public class Receipt {
      * duration, return date, and price.
      */
     public void print(boolean isMember) {
-        // Member discount
-        if (isMember) {
-            this.harga *= 0.85;
-        }
 
         // Price Formats
         DecimalFormatSymbols symbols = new DecimalFormatSymbols();
         symbols.setGroupingSeparator('.');
         symbols.setDecimalSeparator(',');
         DecimalFormat df = new DecimalFormat("Rp #,###.00", symbols);
+        String formattedNumber = String.format("%08d", nomorPesanan);
 
         System.out.println("=".repeat(50));
         System.out.println();
         System.out.println("// Detail Penyewaan");
+        System.out.println("Nomor Pesanan\t\t: " + formattedNumber);
         System.out.println("Tanggal Sewa\t\t: " + tanggalSewa[0] + "/" + tanggalSewa[1] + "/" + tanggalSewa[2]);
         System.out.println("Lama Sewa\t\t: " + jam + " jam");
         System.out.println("Jam Sewa\t\t: " + jamSewa[0] + ":" + jamSewa[1] + " WIB");
@@ -72,8 +72,17 @@ public class Receipt {
         }
         System.out.println("Jam Pengembalian\t: " + jam + ":" + jamSewa[1] + " WIB");
         System.out.println("-".repeat(50));
-        System.out.println("Harga\t\t\t: " + df.format(harga));
+
+        if (isMember) {
+            // Member discount
+            System.out.println("Harga\t\t\t: " + df.format(harga));
+            System.out.println("Diskon\t\t\t: " + df.format(this.harga * 0.15));
+            System.out.println("Total\t\t\t: " + df.format(this.harga * 0.85));
+
+        } else {
+            System.out.println("Harga\t\t\t: " + df.format(harga));
+        }
         System.out.println();
-        System.out.println("=".repeat(50));
+        // System.out.println("=".repeat(50));
     }
 }

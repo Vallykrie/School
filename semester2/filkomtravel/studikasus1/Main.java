@@ -183,12 +183,12 @@ public class Main {
                                         // Nota
                                         Receipt nota = new Receipt(tanggalSewa, jam, van1.getPrice() * jam, jamSewa);
                                         nota.print(userList.get(indexLogin).isMember());
-                                        inMenu = false;
-                                        masihMemilih = false;
-                                        isRunning = false;
-                                        System.out.println();
-                                        System.out.println("Terima kasih telah menggunakan layanan kami");
-                                        System.out.println();
+                                        // inMenu = false;
+                                        // masihMemilih = false;
+                                        // isRunning = false;
+                                        // System.out.println();
+                                        // System.out.println("Terima kasih telah menggunakan layanan kami");
+                                        // System.out.println();
                                     }
 
                                     break;
@@ -212,12 +212,12 @@ public class Main {
                                         // Nota
                                         Receipt nota = new Receipt(tanggalSewa, jam, mobil1.getPrice() * jam, jamSewa);
                                         nota.print(userList.get(indexLogin).isMember());
-                                        inMenu = false;
-                                        masihMemilih = false;
-                                        isRunning = false;
-                                        System.out.println();
-                                        System.out.println("Terima kasih telah menggunakan layanan kami");
-                                        System.out.println();
+                                        // inMenu = false;
+                                        // masihMemilih = false;
+                                        // isRunning = false;
+                                        // System.out.println();
+                                        // System.out.println("Terima kasih telah menggunakan layanan kami");
+                                        // System.out.println();
                                     }
                                     break;
                                 case 3:
@@ -240,15 +240,15 @@ public class Main {
                                         // Nota
                                         Receipt nota = new Receipt(tanggalSewa, jam, motor1.getPrice() * jam, jamSewa);
                                         nota.print(userList.get(indexLogin).isMember());
-                                        inMenu = false;
-                                        masihMemilih = false;
-                                        isRunning = false;
-                                        System.out.println();
-                                        System.out.println("Terima kasih telah menggunakan layanan kami");
-                                        System.out.println();
+                                        // inMenu = false;
+                                        // masihMemilih = false;
+                                        // isRunning = false;
                                     }
                                     break;
                                 case 4:
+                                    System.out.println();
+                                    System.out.println("Terima kasih telah menggunakan layanan kami");
+                                    System.out.println();
                                     masihMemilih = false;
                                     inMenu = false;
                                     isRunning = false;
