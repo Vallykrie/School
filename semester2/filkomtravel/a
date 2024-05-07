@@ -1,0 +1,34 @@
+Apabila diketahui data anggota tim futsal sebagai berikut:
+
+No                                       Tim A                                                                Tim B 
+         Tinggi Badan (cm)   Berat Badan (kg)   Tinggi Badan(cm)   Berat Badan(kg)
+1                     168                               50                                    170                            66
+2                    170                               60                                    167                            60
+3                    165                               56                                    165                            59
+4                    168                               55                                    166                            58
+5                    172                               60                                    168                            58
+6                    170                               70                                    175                            71
+7                    169                               66                                    172                            68
+8                    165                               56                                    171                            68
+9                    171                               72                                    168                            65
+10                   166                               56                                    169                            60
+1. Dengan program java, carilah data pemain diantara kedua tim tersebut:
+a. Yang mempunyai tinggi badan sama
+b. Yang mempunyai berat badan sama
+c. Rentang nilai dari tinggi badan kedua tim
+d. Rentang nilai dari berat badan kedua tim
+e. Tinggi badan pada tim A yang tidak ada pada tim B
+f. Berat badan pada tim B yang tidak ada pada tim A
+2. Buatlah implementasi Map dalam program java berdasarkan kondisi berikut:
+
+a) Implementasikan Map untuk menyimpan data tim A dan tim B dalam bentuk
+Map terpisah.
+b) Dari data tim B, ternyata ada kesalahan pencatatan berat badan yaitu untuk
+pemain yang memiliki tinggi badan 168, berat badannya adalah 66. Update
+data Map untuk tim B.
+c) Implementasikan Map untuk menyimpan data tinggi badan dan berat badan
+dari tim A yang tinggi badannya sama dengan tim B.
+d) Dari data tim A yang mempunyai tinggi badan sama dengan tim B tadi, pelatih
+memutuskan untuk hanya mengambil pemain yang memiliki tinggi badan 168
+keatas, sehingga pemain dengan tinggi badan kurang dari 168 dinyatakan
+dieleminasi dari tim. Update data Map tersebutsesuai dengan kondisi terakhir.

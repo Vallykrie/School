@@ -2,6 +2,7 @@ package filkomtravel.studikasus1;
 
 public class Member extends User {
     private String tanggalLahir;
+    // private Date date;
     private String status = "member";
     private boolean isMember = true;
 
