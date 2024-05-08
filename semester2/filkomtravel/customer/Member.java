@@ -7,6 +7,10 @@ import java.util.Scanner;
  * Represents a member of the system.
  * Extends the Guest class and adds additional member-specific functionality.
  */
+/**
+ * Represents a member of the system.
+ * Extends the Guest class.
+ */
 public class Member extends Guest {
     private Calendar startMember;
     private String tanggalLahir;
@@ -17,10 +21,11 @@ public class Member extends Guest {
      * Constructs a new Member object with the specified username, password, email,
      * and full name.
      *
-     * @param username    the username of the member
-     * @param password    the password of the member
-     * @param email       the email of the member
-     * @param namaLengkap the full name of the member
+     * @param username     the username of the member
+     * @param password     the password of the member
+     * @param email        the email of the member
+     * @param namaLengkap  the full name of the member
+     * @param tanggalLahir the date of birth of the member
      */
     public Member(String username, String password, String email, String namaLengkap, String tanggalLahir) {
         super(username, password, email, namaLengkap);
@@ -69,19 +74,31 @@ public class Member extends Guest {
         this.tanggalLahir = tanggalLahir;
     }
 
+    /**
+     * Sets the start date of the member's membership.
+     */
     public void setStartMember() {
         this.startMember = Calendar.getInstance();
     }
 
+    /**
+     * Gets the start date of the member's membership.
+     *
+     * @return the start date of the member's membership
+     */
     public Calendar getStartMember() {
         return startMember;
     }
 
+    /**
+     * Gets the time duration in seconds since the member became a member.
+     *
+     * @return the time duration in seconds since the member became a member
+     */
     public long getTime() {
         Calendar currentTime = Calendar.getInstance();
         long timeInMillis = currentTime.getTimeInMillis() - startMember.getTimeInMillis();
         long timeInSeconds = timeInMillis / 1000;
         return timeInSeconds;
     }
-
 }
