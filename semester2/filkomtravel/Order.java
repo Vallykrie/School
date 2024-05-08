@@ -41,8 +41,12 @@ public class Order {
         listNota.get(index).print();
     }
 
-    public void cancel(int nomorPesanan) {
+    public void checkOut(int nomorPesanan) {
         listPesanan.remove(nomorPesanan);
+    }
+
+    public boolean isEmpty() {
+        return listPesanan.isEmpty();
     }
 
     public void tambahPesanan(Vehicle sewaan) {

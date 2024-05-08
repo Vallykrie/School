@@ -262,6 +262,11 @@ public class Main {
                         System.out.println(" ".repeat(20) + "Order Anda" + " ".repeat(20));
                         System.out.println();
                         ord.print();
+                        System.out.println("Pilih nomor pesanan yang ingin di check out");
+                        int index = than.nextInt();
+                        than.nextLine();
+                        ord.checkOut(index - 1);
+                        ord.printNota(index - 1);
 
                         break;
                     case 4:
