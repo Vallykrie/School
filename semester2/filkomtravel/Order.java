@@ -10,6 +10,11 @@ public class Order {
     private int nomorPesanan = 0;
     private Calendar tanggalPesanan;
     private Vehicle sewaan;
+    private Status status;
+
+    enum Status {
+        UNPAID, SUCCESS, CANCELLED
+    }
 
     public Order() {
     }
@@ -18,9 +23,10 @@ public class Order {
         this.nomorPesanan = nomorPesanan;
         this.tanggalPesanan = tanggalPesanan;
         this.sewaan = sewaan;
+        this.status = status.UNPAID;
     }
 
-    public void print() {
+    public void printDetails() {
         // Price Formats
         DecimalFormatSymbols symbols = new DecimalFormatSymbols();
         symbols.setGroupingSeparator('.');
@@ -33,6 +39,7 @@ public class Order {
             System.out.println("Model: " + pesanan.sewaan.getModel());
             System.out.println("Color: " + pesanan.sewaan.getColor());
             System.out.println("Price: " + df.format(pesanan.sewaan.getPrice()));
+            System.out.println("Status: " + pesanan.status);
             System.out.println();
         });
     }
@@ -41,15 +48,15 @@ public class Order {
         listNota.get(index).print();
     }
 
-    public void checkOut(int nomorPesanan) {
-        listPesanan.remove(nomorPesanan);
+    public void pay(int nomorPesanan) {
+        listPesanan.get(nomorPesanan).status = status.SUCCESS;
     }
 
     public boolean isEmpty() {
         return listPesanan.isEmpty();
     }
 
-    public void tambahPesanan(Vehicle sewaan) {
+    public void checkOut(Vehicle sewaan) {
         Calendar date = Calendar.getInstance();
         int num = listPesanan.size() + 1;
         Order pesanan = new Order(num, date, sewaan);
@@ -60,6 +67,10 @@ public class Order {
         Receipt nota = new Receipt(tanggalSewa, jam, harga, jamSewa, isMember);
         listNota.add(nota);
     }
+
+    public boolean applyPromo() {
+        return true;
+    }
 }
 
 class MainOrder {
@@ -68,9 +79,9 @@ class MainOrder {
         Vehicle motor = new Motor("Honda Beat", "Black", "B 1234 XYZ", 2, 50000);
         Vehicle van = new Van("Toyota Hiace", "White", "B 1234 XYZ", 15, 500000);
         Order pesanan1 = new Order();
-        pesanan1.tambahPesanan(mobil);
-        pesanan1.tambahPesanan(van);
-        pesanan1.tambahPesanan(motor);
-        pesanan1.print();
+        pesanan1.checkOut(mobil);
+        pesanan1.checkOut(van);
+        pesanan1.checkOut(motor);
+        pesanan1.printDetails();
     }
 }
