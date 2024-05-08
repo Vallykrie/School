@@ -13,7 +13,7 @@ public class Receipt {
     private String[] tanggalSewa, jamSewa;
     private int jam;
     private double harga;
-    private static int nomorPesanan = 0;
+    private static int nomorNota = 0;
     private boolean isMember;
 
     /**
@@ -30,7 +30,7 @@ public class Receipt {
         this.harga = harga;
         this.jamSewa = jamSewa;
         this.isMember = isMember;
-        nomorPesanan++;
+        nomorNota++;
     }
 
     /**
@@ -44,12 +44,12 @@ public class Receipt {
         symbols.setGroupingSeparator('.');
         symbols.setDecimalSeparator(',');
         DecimalFormat df = new DecimalFormat("Rp #,###.00", symbols);
-        String formattedNumber = String.format("%08d", nomorPesanan);
+        String formattedNumber = String.format("%08d", nomorNota);
 
         System.out.println("=".repeat(50));
         System.out.println();
         System.out.println("// Detail Penyewaan");
-        System.out.println("Nomor Pesanan\t\t: " + formattedNumber);
+        System.out.println("Nomor Nota\t\t: " + formattedNumber);
         System.out.println("Tanggal Sewa\t\t: " + tanggalSewa[0] + "/" + tanggalSewa[1] + "/" + tanggalSewa[2]);
         System.out.println("Lama Sewa\t\t: " + jam + " jam");
         System.out.println("Jam Sewa\t\t: " + jamSewa[0] + ":" + jamSewa[1] + " WIB");

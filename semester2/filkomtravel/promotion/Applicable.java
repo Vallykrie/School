@@ -1,3 +1,4 @@
+import customer.*;
 
 public interface Applicable {
     public boolean isCustomerEligible(Guest user);

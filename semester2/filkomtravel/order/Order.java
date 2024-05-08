@@ -50,6 +50,10 @@ public class Order {
         listNota.get(index).print();
     }
 
+    public void printNota() {
+        listNota.getLast().print();
+    }
+
     public void pay(int nomorPesanan) {
         listPesanan.get(nomorPesanan).status = status.SUCCESS;
     }

@@ -1,4 +1,5 @@
 import customer.*;
+import order.*;
 import vehicle.*;
 import java.util.Scanner;
 import java.util.InputMismatchException;
@@ -198,6 +199,7 @@ public class Main {
                                             ord.tambahNota(tanggalSewa, jam, van1.getPrice() * jam, jamSewa,
                                                     userList.get(indexLogin).isMember());
                                             ord.checkOut(van1);
+                                            ord.printNota();
                                         }
 
                                         break;
@@ -220,6 +222,7 @@ public class Main {
                                             ord.tambahNota(tanggalSewa, jam, mobil1.getPrice() * jam, jamSewa,
                                                     userList.get(indexLogin).isMember());
                                             ord.checkOut(mobil1);
+                                            ord.printNota();
                                         }
                                         break;
                                     case 3:
@@ -241,6 +244,7 @@ public class Main {
                                             ord.tambahNota(tanggalSewa, jam, motor1.getPrice() * jam, jamSewa,
                                                     userList.get(indexLogin).isMember());
                                             ord.checkOut(motor1);
+                                            ord.printNota();
                                         }
                                         break;
                                     case 4:
