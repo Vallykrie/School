@@ -1,3 +1,4 @@
+package vehicle;
 
 /**
  * Represents a Motor vehicle.
@@ -18,7 +19,7 @@ public class Motor extends Vehicle {
      * @param capacity    the capacity of the Motor vehicle
      * @param price       the price of the Motor vehicle
      */
-    Motor(String model, String color, String numberPlate, int capacity, double price) {
+    public Motor(String model, String color, String numberPlate, int capacity, double price) {
         super(model, color, numberPlate, capacity, price);
     }
 }

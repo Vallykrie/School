@@ -1,4 +1,6 @@
 
+import customer.*;
+import vehicle.*;
 import java.util.Scanner;
 import java.util.LinkedList;
 
@@ -31,10 +33,10 @@ public class Main {
         Vehicle motor1 = new Motor("Vario", "Merah", "N 1234 CD", 2, 5000);
 
         // Data User
-        Guest user = new Guest("user", "user", "user", "user");
-        Guest admin = new Member("admin", "admin", "admin", "admin");
+        Guest guest = new Guest("guest", "guest", "guest", "guest");
+        Member admin = new Member("admin", "admin", "admin", "admin", "2000/01/01");
         LinkedList<Guest> userList = new LinkedList<>();
-        userList.add(user);
+        userList.add(guest);
         userList.add(admin);
 
         // Menu 1
@@ -120,20 +122,20 @@ public class Main {
                     case 1:
                         System.out.println(divider1);
                         System.out.println("// Profile Anda");
-                        userList.get(indexLogin).viewProfile();
-                        System.out.println(divider1);
-                        if (!(userList.get(indexLogin).isMember())) {
+                        Guest loggedIn = userList.get(indexLogin);
+                        if (!(loggedIn.isMember())) {
+                            loggedIn.viewProfile();
+                            System.out.println(divider1);
                             System.out.println(
-                                    "Nampaknya anda belum menjadi member Filkom Travel\nAnda akan mendapatkan diskon 15% setiap transaksi dengan menjadi member.");
+                                    "Nampaknya anda belum menjadi member Filkom Travel\nAnda akan mendapatkan diskon 15% setiap transaksi \ndengan menjadi member.");
                             System.out.println("Apakah anda ingin menjadi member? (y/n) : ");
                             String jawab = than.nextLine();
                             if (jawab.equalsIgnoreCase("y")) {
-                                System.out.print("Silahkan masukkan tanggal lahir anda (yyyy/mm/dd) : ");
+                                System.out.print("Silahkan masukkan tanggal lahir anda (yyyy/mm/dd) : \n");
                                 String tanggalLahir = than.nextLine();
-                                Member member = new Member(userList.get(indexLogin).getUsername(),
-                                        userList.get(indexLogin).getPassword(), userList.get(indexLogin).getEmail(),
-                                        userList.get(indexLogin).getNamaLengkap());
-                                member.setTanggalLahir(tanggalLahir);
+                                Member member = new Member(loggedIn.getUsername(),
+                                        loggedIn.getPassword(), loggedIn.getEmail(),
+                                        loggedIn.getNamaLengkap(), tanggalLahir);
                                 userList.set(indexLogin, member);
                                 System.out.println(divider1);
                                 System.out.println("Selamat! Anda sudah menjadi member Filkom Travel");

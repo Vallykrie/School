@@ -1,3 +1,4 @@
+package vehicle;
 
 /**
  * The Van class represents a van vehicle.
@@ -16,7 +17,7 @@ public class Van extends Vehicle {
      * @param capacity    the capacity of the van
      * @param price       the price of the van
      */
-    Van(String model, String color, String numberPlate, int capacity, double price) {
+    public Van(String model, String color, String numberPlate, int capacity, double price) {
         super(model, color, numberPlate, capacity, price);
     }
 }

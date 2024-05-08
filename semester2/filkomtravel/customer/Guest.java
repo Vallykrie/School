@@ -3,27 +3,26 @@ package customer;
 import java.util.LinkedList;
 
 /**
- * The User class represents a user in the system.
- * It contains information about the user's username, password, email, and full
- * name.
- * Users can log in, edit their profile, delete their profile, and view their
- * profile.
+ * The Guest class represents a guest user in the system.
+ * It extends the Customer class and provides additional functionality for guest
+ * users.
  */
-public class Guest {
+public class Guest extends Customer {
     private String username, password, email, namaLengkap;
     private String status = "non-member";
     private boolean isMember = false;
 
     /**
-     * Constructs a User object with the specified username, password, email, and
+     * Constructs a Guest object with the specified username, password, email, and
      * full name.
      * 
-     * @param username    the username of the user
-     * @param password    the password of the user
-     * @param email       the email of the user
-     * @param namaLengkap the full name of the user
+     * @param username    the username of the guest
+     * @param password    the password of the guest
+     * @param email       the email of the guest
+     * @param namaLengkap the full name of the guest
      */
     public Guest(String username, String password, String email, String namaLengkap) {
+        super(username, password, email, namaLengkap);
         this.username = username;
         this.password = password;
         this.email = email;
@@ -31,13 +30,13 @@ public class Guest {
     }
 
     /**
-     * Checks if the given username and password match any user in the provided user
-     * list.
+     * Checks if the given username and password match any guest user in the
+     * provided user list.
      * 
      * @param username the username to be checked
      * @param password the password to be checked
-     * @param userList the list of users to search in
-     * @return true if the username and password match a user, false otherwise
+     * @param userList the list of guest users to search in
+     * @return true if the username and password match a guest user, false otherwise
      */
     public static boolean login(String username, String password, LinkedList<Guest> userList) {
         for (Guest user : userList) {
@@ -49,11 +48,12 @@ public class Guest {
     }
 
     /**
-     * Gets the index of the user with the given username in the provided user list.
+     * Gets the index of the guest user with the given username in the provided user
+     * list.
      * 
-     * @param username the username of the user to search for
-     * @param userList the list of users to search in
-     * @return the index of the user if found, -1 otherwise
+     * @param username the username of the guest user to search for
+     * @param userList the list of guest users to search in
+     * @return the index of the guest user if found, -1 otherwise
      */
     public static int get(String username, LinkedList<Guest> userList) {
         for (int i = 0; i < userList.size(); i++) {
@@ -65,13 +65,13 @@ public class Guest {
     }
 
     /**
-     * Edits the profile of the user with the specified username, password, email,
-     * and full name.
+     * Edits the profile of the guest user with the specified username, password,
+     * email, and full name.
      * 
-     * @param username    the new username of the user
-     * @param password    the new password of the user
-     * @param email       the new email of the user
-     * @param namaLengkap the new full name of the user
+     * @param username    the new username of the guest user
+     * @param password    the new password of the guest user
+     * @param email       the new email of the guest user
+     * @param namaLengkap the new full name of the guest user
      */
     public void editProfile(String username, String password, String email, String namaLengkap) {
         this.username = username;
@@ -82,7 +82,7 @@ public class Guest {
     }
 
     /**
-     * Deletes the profile of the user.
+     * Deletes the profile of the guest user.
      */
     public void deleteProfile() {
         this.username = null;
@@ -93,7 +93,7 @@ public class Guest {
     }
 
     /**
-     * Displays the profile information of the user.
+     * Displays the profile information of the guest user.
      */
     public void viewProfile() {
         System.out.println("Nama Lengkap\t: " + namaLengkap);
@@ -105,7 +105,7 @@ public class Guest {
     // Getters and setters
 
     /**
-     * Sets the username of the user.
+     * Sets the username of the guest user.
      * 
      * @param username the new username to set
      */
@@ -114,7 +114,7 @@ public class Guest {
     }
 
     /**
-     * Sets the password of the user.
+     * Sets the password of the guest user.
      * 
      * @param password the new password to set
      */
@@ -123,7 +123,7 @@ public class Guest {
     }
 
     /**
-     * Sets the email of the user.
+     * Sets the email of the guest user.
      * 
      * @param email the new email to set
      */
@@ -132,7 +132,7 @@ public class Guest {
     }
 
     /**
-     * Sets the full name of the user.
+     * Sets the full name of the guest user.
      * 
      * @param namaLengkap the new full name to set
      */
@@ -141,54 +141,54 @@ public class Guest {
     }
 
     /**
-     * Gets the username of the user.
+     * Gets the username of the guest user.
      * 
-     * @return the username of the user
+     * @return the username of the guest user
      */
     public String getUsername() {
         return username;
     }
 
     /**
-     * Gets the password of the user.
+     * Gets the password of the guest user.
      * 
-     * @return the password of the user
+     * @return the password of the guest user
      */
     public String getPassword() {
         return password;
     }
 
     /**
-     * Gets the email of the user.
+     * Gets the email of the guest user.
      * 
-     * @return the email of the user
+     * @return the email of the guest user
      */
     public String getEmail() {
         return email;
     }
 
     /**
-     * Gets the full name of the user.
+     * Gets the full name of the guest user.
      * 
-     * @return the full name of the user
+     * @return the full name of the guest user
      */
     public String getNamaLengkap() {
         return namaLengkap;
     }
 
     /**
-     * Gets the status of the user.
+     * Gets the status of the guest user.
      * 
-     * @return the status of the user
+     * @return the status of the guest user
      */
     public String getStatus() {
         return status;
     }
 
     /**
-     * Checks if the user is a member.
+     * Checks if the guest user is a member.
      * 
-     * @return true if the user is a member, false otherwise
+     * @return true if the guest user is a member, false otherwise
      */
     public boolean isMember() {
         return isMember;

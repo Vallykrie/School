@@ -1,29 +1,26 @@
-
+package customer;
 
 import java.util.LinkedList;
 
 /**
- * The User class represents a user in the system.
- * It contains information about the user's username, password, email, and full
- * name.
- * Users can log in, edit their profile, delete their profile, and view their
- * profile.
+ * The abstract class representing a customer.
  */
-public class Guest {
+public abstract class Customer {
+
     private String username, password, email, namaLengkap;
-    private String status = "non-member";
-    private boolean isMember = false;
+    private String status;
+    private boolean isMember;
 
     /**
-     * Constructs a User object with the specified username, password, email, and
-     * full name.
+     * Constructs a Customer object with the specified username, password, email,
+     * and full name.
      * 
-     * @param username    the username of the user
-     * @param password    the password of the user
-     * @param email       the email of the user
-     * @param namaLengkap the full name of the user
+     * @param username    the username of the customer
+     * @param password    the password of the customer
+     * @param email       the email of the customer
+     * @param namaLengkap the full name of the customer
      */
-    public Guest(String username, String password, String email, String namaLengkap) {
+    public Customer(String username, String password, String email, String namaLengkap) {
         this.username = username;
         this.password = password;
         this.email = email;
@@ -65,13 +62,13 @@ public class Guest {
     }
 
     /**
-     * Edits the profile of the user with the specified username, password, email,
-     * and full name.
+     * Edits the profile of the customer with the specified username, password,
+     * email, and full name.
      * 
-     * @param username    the new username of the user
-     * @param password    the new password of the user
-     * @param email       the new email of the user
-     * @param namaLengkap the new full name of the user
+     * @param username    the new username of the customer
+     * @param password    the new password of the customer
+     * @param email       the new email of the customer
+     * @param namaLengkap the new full name of the customer
      */
     public void editProfile(String username, String password, String email, String namaLengkap) {
         this.username = username;
@@ -82,7 +79,7 @@ public class Guest {
     }
 
     /**
-     * Deletes the profile of the user.
+     * Deletes the profile of the customer.
      */
     public void deleteProfile() {
         this.username = null;
@@ -93,7 +90,7 @@ public class Guest {
     }
 
     /**
-     * Displays the profile information of the user.
+     * Displays the profile information of the customer.
      */
     public void viewProfile() {
         System.out.println("Nama Lengkap\t: " + namaLengkap);
@@ -105,7 +102,7 @@ public class Guest {
     // Getters and setters
 
     /**
-     * Sets the username of the user.
+     * Sets the username of the customer.
      * 
      * @param username the new username to set
      */
@@ -114,7 +111,7 @@ public class Guest {
     }
 
     /**
-     * Sets the password of the user.
+     * Sets the password of the customer.
      * 
      * @param password the new password to set
      */
@@ -123,7 +120,7 @@ public class Guest {
     }
 
     /**
-     * Sets the email of the user.
+     * Sets the email of the customer.
      * 
      * @param email the new email to set
      */
@@ -132,7 +129,7 @@ public class Guest {
     }
 
     /**
-     * Sets the full name of the user.
+     * Sets the full name of the customer.
      * 
      * @param namaLengkap the new full name to set
      */
@@ -141,56 +138,57 @@ public class Guest {
     }
 
     /**
-     * Gets the username of the user.
+     * Gets the username of the customer.
      * 
-     * @return the username of the user
+     * @return the username of the customer
      */
     public String getUsername() {
         return username;
     }
 
     /**
-     * Gets the password of the user.
+     * Gets the password of the customer.
      * 
-     * @return the password of the user
+     * @return the password of the customer
      */
     public String getPassword() {
         return password;
     }
 
     /**
-     * Gets the email of the user.
+     * Gets the email of the customer.
      * 
-     * @return the email of the user
+     * @return the email of the customer
      */
     public String getEmail() {
         return email;
     }
 
     /**
-     * Gets the full name of the user.
+     * Gets the full name of the customer.
      * 
-     * @return the full name of the user
+     * @return the full name of the customer
      */
     public String getNamaLengkap() {
         return namaLengkap;
     }
 
     /**
-     * Gets the status of the user.
+     * Gets the status of the customer.
      * 
-     * @return the status of the user
+     * @return the status of the customer
      */
     public String getStatus() {
         return status;
     }
 
     /**
-     * Checks if the user is a member.
+     * Checks if the customer is a member.
      * 
-     * @return true if the user is a member, false otherwise
+     * @return true if the customer is a member, false otherwise
      */
     public boolean isMember() {
         return isMember;
     }
+
 }

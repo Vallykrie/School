@@ -1,3 +1,4 @@
+package vehicle;
 
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
@@ -21,7 +22,7 @@ public abstract class Vehicle {
      * @param capacity    the capacity of the vehicle
      * @param price       the price of the vehicle
      */
-    Vehicle(String model, String color, String numberPlate, int capacity, double price) {
+    public Vehicle(String model, String color, String numberPlate, int capacity, double price) {
         this.model = model;
         this.color = color;
         this.numberPlate = numberPlate;

@@ -1,3 +1,4 @@
+package vehicle;
 
 /**
  * The `Mobil` class represents a type of vehicle called "Mobil".
@@ -16,7 +17,7 @@ public class Mobil extends Vehicle {
      * @param capacity    the capacity of the mobil
      * @param price       the price of the mobil
      */
-    Mobil(String model, String color, String numberPlate, int capacity, double price) {
+    public Mobil(String model, String color, String numberPlate, int capacity, double price) {
         super(model, color, numberPlate, capacity, price);
     }
 }
