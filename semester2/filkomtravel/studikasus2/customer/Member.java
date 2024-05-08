@@ -1,3 +1,4 @@
+package customer;
 
 public class Member extends Guest {
     private String tanggalLahir;

@@ -3,6 +3,13 @@
   "configurations": [
     {
       "type": "java",
+      "name": "MainAVLT",
+      "request": "launch",
+      "mainClass": "MainAVLT",
+      "projectName": "School_e414736b"
+    },
+    {
+      "type": "java",
       "name": "nathan_051_8_1",
       "request": "launch",
       "mainClass": "ASD.Praktikum.nathan_051_8_1",

@@ -60,10 +60,9 @@ class AVL {
     NodeAVL insert(NodeAVL node, String playerName, int score) {
         if (node == null)
             return new NodeAVL(playerName, score);
-
-        if (score < node.score)
+        if (playerName.compareTo(node.playerName) < 0)
             node.left = insert(node.left, playerName, score);
-        else if (score > node.score)
+        else if (playerName.compareTo(node.playerName) > 0)
             node.right = insert(node.right, playerName, score);
         else {
             node.score = score;
@@ -84,7 +83,6 @@ class AVL {
             node.left = leftRotate(node.left);
             return rightRotate(node);
         }
-
         if (balance < -1 && score < node.right.score) {
             node.right = rightRotate(node.right);
             return leftRotate(node);
@@ -133,8 +131,8 @@ class AVL {
             System.out.println("Skor kedua pemain sama");
     }
 
-    void searchPlayer(int score, String type) {
-        NodeAVL p = search(root, score);
+    void searchPlayer(String player, String type) {
+        NodeAVL p = search(root, player);
 
         if (p == null) {
             System.out.println("Pemain belum terdaftar");
@@ -153,14 +151,26 @@ class AVL {
         }
     }
 
-    NodeAVL search(NodeAVL node, int score) {
-        if (node == null || score == node.score)
+    NodeAVL search(NodeAVL node, String playerName) {
+        if (node == null || playerName.equals(node.playerName))
             return node;
 
-        if (score < node.score)
-            return search(node.left, score);
+        if (playerName.compareTo(node.playerName) < 0)
+            return search(node.left, playerName);
 
-        return search(node.right, score);
+        return search(node.right, playerName);
+    }
+
+    NodeAVL findHighestScore(NodeAVL node) {
+        if (node == null || node.right == null)
+            return node;
+        return findHighestScore(node.right);
+    }
+
+    NodeAVL findLowestScore(NodeAVL node) {
+        if (node == null || node.left == null)
+            return node;
+        return findLowestScore(node.left);
     }
 }
 
@@ -186,10 +196,16 @@ public class nathan_051_8_2 {
                     leaderboard.comparePlayers(command[0], command[1]);
                     break;
                 case "CARI":
-                    if (command[1].equals("TERTINGGI") || command[1].equals("TERENDAH"))
-                        leaderboard.searchPlayer("", command[1]);
-                    else
-                        leaderboard.searchPlayer(command[1], "LAINNYA");
+                    if (command[1].equals("TERTINGGI")) {
+                        NodeAVL tertinggi = leaderboard.findHighestScore(leaderboard.root);
+                        System.out.println("Pemain dengan skor tertinggi adalah " + tertinggi.playerName
+                                + " dengan skor " + tertinggi.score);
+                    } else if (command[1].equals("TERENDAH")) {
+                        NodeAVL terendah = leaderboard.findLowestScore(leaderboard.root);
+                        System.out.println("Pemain dengan skor terendah adalah " + terendah.playerName + " dengan skor "
+                                + terendah.score);
+                    } else
+                        leaderboard.searchPlayer(command[2], "LAINNYA");
                     break;
                 case "TAMPILKAN":
                     leaderboard.displayLeaderboard();

@@ -2,6 +2,8 @@ package ASD.Praktikum;
 
 import java.util.Scanner;
 
+import ASD.UTP.NodeAVL;
+
 class NodeAVL {
     String barang;
     int data;
@@ -156,9 +158,9 @@ public class Main {
                     System.out.println("Data " + barang.length + " barang berhasil ditambah\n");
                     break;
                 case "CARI":
-                    String find[] = sc.nextLine().split(" ");
-                    String condition = find[0] + " " + find[1];
-                    int harga = Integer.parseInt(find[2]);
+                    String cari[] = sc.nextLine().split(" ");
+                    String condition = cari[0] + " " + cari[1];
+                    int harga = Integer.parseInt(cari[2]);
                     if (!avl.search(avl.root, condition, harga)) {
                         System.out.println("Data barang tidak ditemukan\n");
                     } else {

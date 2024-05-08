@@ -1,3 +1,4 @@
+// package ASD.UTP;
 // package ASD.Praktikum;
 
 import java.util.Scanner;
@@ -18,37 +19,15 @@ public class nathan_051_8_1 {
                         String nama = details[0];
                         int harga = Integer.parseInt(details[1]);
                         avl.root = avl.insert(avl.root, nama, harga);
-                        avl.preOrder(avl.root);
+                        // avl.preOrder(avl.root);
                     }
                     System.out.println("Data " + items.length + " barang berhasil ditambah");
                     break;
                 case "CARI BARANG":
                     String[] cari = than.nextLine().split(" ");
                     int hargaCari = Integer.parseInt(cari[2]);
-                    switch (cari[0]) {
-                        case "KURANG":
-                            avl.count = 0;
-                            avl.found = false;
-                            avl.kurangDari(avl.root, hargaCari);
-                            if (avl.found == false) {
-                                System.out.println("Data barang tidak ditemukan");
-                            }
-                            break;
-                        case "LEBIH":
-                            avl.count = 0;
-                            avl.found = false;
-                            avl.lebihDari(avl.root, hargaCari);
-                            if (avl.found == false) {
-                                System.out.println("Data barang tidak ditemukan");
-                            }
-                            break;
-                        case "SAMA":
-                            avl.found = false;
-                            avl.samaDengan(avl.root, hargaCari);
-                            if (avl.found == false) {
-                                System.out.println("Data barang tidak ditemukan");
-                            }
-                            break;
+                    if (!avl.search(avl.root, cari[0], hargaCari)) {
+                        System.out.println("Data barang tidak ditemukan");
                     }
                     break;
             }
@@ -151,16 +130,6 @@ class AVL {
         return node;
     }
 
-    NodeAVL search(NodeAVL root, int price) {
-        if (root == null || root.price == price)
-            return root;
-
-        if (root.price > price)
-            return search(root.left, price);
-
-        return search(root.right, price);
-    }
-
     void preOrder(NodeAVL node) {
         if (node != null) {
             System.out.println(node.name + " = Rp" + node.price);
@@ -177,7 +146,6 @@ class AVL {
             return null;
         }
         if (root.price < price) {
-            // count++;
             found = true;
             System.out.println(++count + ". " + root.name + " = Rp" + root.price);
             kurangDari(root.left, price);
@@ -187,7 +155,6 @@ class AVL {
         } else {
             kurangDari(root.left, price);
         }
-        // count = 0;
         return root;
     }
 
@@ -196,7 +163,6 @@ class AVL {
             return null;
         }
         if (root.price > price) {
-            // count++;
             found = true;
             lebihDari(root.left, price);
             lebihDari(root.right, price);
@@ -206,7 +172,6 @@ class AVL {
         } else {
             lebihDari(root.right, price);
         }
-        // count = 0;
         return root;
     }
 
@@ -226,4 +191,44 @@ class AVL {
         }
         return root;
     }
+
+    int nomorLebih = 1;
+    int nomorKurang = 1;
+
+    boolean search(NodeAVL root, String condition, int harga) {
+        if (root == null) {
+            return false;
+        }
+        if (condition.equals("LEBIH")) {
+            boolean found = false;
+            boolean leftFound = search(root.right, condition, harga);
+            if (root.price > harga) {
+                System.out.println(nomorLebih++ + ". " + root.name + " = Rp" + root.price);
+                found = true;
+            }
+            boolean rightFound = search(root.left, condition, harga);
+            return found || leftFound || rightFound;
+        } else if (condition.equals("KURANG")) {
+            boolean rightFound = search(root.right, condition, harga);
+            boolean found = false;
+            if (root.price < harga) {
+                System.out.println(nomorKurang++ + ". " + root.name + " = Rp" + root.price);
+                found = true;
+            }
+            boolean leftFound = search(root.left, condition, harga);
+
+            return leftFound || found || rightFound;
+        } else if (condition.equals("SAMA")) {
+            boolean leftFound = search(root.left, condition, harga);
+            boolean found = false;
+            if (root.price == harga) {
+                System.out.println(root.name + " = Rp" + root.price);
+                found = true;
+            }
+            boolean rightFound = search(root.right, condition, harga);
+            return leftFound || found || rightFound;
+        }
+        return false;
+    }
+
 }
