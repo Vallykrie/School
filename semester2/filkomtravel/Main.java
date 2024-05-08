@@ -1,4 +1,3 @@
-
 import customer.*;
 import vehicle.*;
 import java.util.Scanner;
@@ -35,6 +34,7 @@ public class Main {
         // Data User
         Guest guest = new Guest("guest", "guest", "guest", "guest");
         Guest admin = new Member("admin", "admin", "admin", "admin", "2000/01/01");
+        Order ord = new Order();
         LinkedList<Guest> userList = new LinkedList<>();
         userList.add(guest);
         userList.add(admin);
@@ -102,6 +102,9 @@ public class Main {
                     inMenu = false;
                     break;
                 case 3:
+                    System.out.println();
+                    System.out.println("Terima kasih telah menggunakan layanan kami");
+                    System.out.println();
                     isRunning = false;
                     masihMemilih = false;
                     break;
@@ -120,7 +123,8 @@ public class Main {
                 System.out.println();
                 System.out.println("1. Profile");
                 System.out.println("2. Sewa Kendaraan");
-                System.out.println("3. Keluar");
+                System.out.println("3. Order Anda");
+                System.out.println("4. Keluar");
                 System.out.println();
                 System.out.println("Ketik 1, 2, atau 3");
                 System.out.print("-> ");
@@ -155,18 +159,16 @@ public class Main {
                         }
                         break;
                     case 2:
-
                         masihMemilih = true;
                         while (masihMemilih) {
                             System.out.println(divider2);
                             System.out.println(" ".repeat(8) + "Pilih Kendaraan yang Ingin di Sewa" + " ".repeat(8));
                             System.out.println();
-                            System.out.println("1. Van");
-                            System.out.println("2. Mobil");
-                            System.out.println("3. Motor");
-                            System.out.println("4. Keluar");
+                            System.out.printf("   %-25s4. Kembali\n", "1. Van");
+                            System.out.printf("   %-25s5. Keluar\n", "2. Mobil");
+                            System.out.println("   3. Motor");
                             System.out.println();
-                            System.out.println("Ketik 1, 2, 3, atau 4");
+                            System.out.println("Ketik 1, 2, 3, 4, atau 5");
                             System.out.print("-> ");
                             pilih = than.nextInt();
                             than.nextLine();
@@ -189,16 +191,9 @@ public class Main {
                                         String waktu = than.nextLine();
                                         String[] tanggalSewa = tanggal.split("/");
                                         String[] jamSewa = waktu.split(":");
-
-                                        // Nota
-                                        Receipt nota = new Receipt(tanggalSewa, jam, van1.getPrice() * jam, jamSewa);
-                                        nota.print(userList.get(indexLogin).isMember());
-                                        // inMenu = false;
-                                        // masihMemilih = false;
-                                        // isRunning = false;
-                                        // System.out.println();
-                                        // System.out.println("Terima kasih telah menggunakan layanan kami");
-                                        // System.out.println();
+                                        ord.tambahNota(tanggalSewa, jam, van1.getPrice() * jam, jamSewa,
+                                                userList.get(indexLogin).isMember());
+                                        ord.tambahPesanan(van1);
                                     }
 
                                     break;
@@ -218,16 +213,9 @@ public class Main {
                                         String waktu = than.nextLine();
                                         String[] tanggalSewa = tanggal.split("/");
                                         String[] jamSewa = waktu.split(":");
-
-                                        // Nota
-                                        Receipt nota = new Receipt(tanggalSewa, jam, mobil1.getPrice() * jam, jamSewa);
-                                        nota.print(userList.get(indexLogin).isMember());
-                                        // inMenu = false;
-                                        // masihMemilih = false;
-                                        // isRunning = false;
-                                        // System.out.println();
-                                        // System.out.println("Terima kasih telah menggunakan layanan kami");
-                                        // System.out.println();
+                                        ord.tambahNota(tanggalSewa, jam, mobil1.getPrice() * jam, jamSewa,
+                                                userList.get(indexLogin).isMember());
+                                        ord.tambahPesanan(mobil1);
                                     }
                                     break;
                                 case 3:
@@ -246,16 +234,15 @@ public class Main {
                                         String waktu = than.nextLine();
                                         String[] tanggalSewa = tanggal.split("/");
                                         String[] jamSewa = waktu.split(":");
-
-                                        // Nota
-                                        Receipt nota = new Receipt(tanggalSewa, jam, motor1.getPrice() * jam, jamSewa);
-                                        nota.print(userList.get(indexLogin).isMember());
-                                        // inMenu = false;
-                                        // masihMemilih = false;
-                                        // isRunning = false;
+                                        ord.tambahNota(tanggalSewa, jam, motor1.getPrice() * jam, jamSewa,
+                                                userList.get(indexLogin).isMember());
+                                        ord.tambahPesanan(motor1);
                                     }
                                     break;
                                 case 4:
+                                    masihMemilih = false;
+                                    break;
+                                case 5:
                                     System.out.println();
                                     System.out.println("Terima kasih telah menggunakan layanan kami");
                                     System.out.println();
@@ -271,6 +258,16 @@ public class Main {
 
                         break;
                     case 3:
+                        System.out.println(divider2);
+                        System.out.println(" ".repeat(20) + "Order Anda" + " ".repeat(20));
+                        System.out.println();
+                        ord.print();
+
+                        break;
+                    case 4:
+                        System.out.println();
+                        System.out.println("Terima kasih telah menggunakan layanan kami");
+                        System.out.println();
                         inMenu = false;
                         isRunning = false;
                         break;

@@ -1,39 +1,60 @@
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.util.Calendar;
 import vehicle.*;
 import java.util.LinkedList;
 
 public class Order {
-    Calendar tanggalPesanan;
-    static int nomorPesanan;
-    Vehicle sewaan;
-    LinkedList<Order> listPesanan = new LinkedList<Order>();
+    private LinkedList<Order> listPesanan = new LinkedList<Order>();
+    private LinkedList<Receipt> listNota = new LinkedList<Receipt>();
+    private int nomorPesanan = 0;
+    private Calendar tanggalPesanan;
+    private Vehicle sewaan;
 
-    public Order(Vehicle sewaan) {
+    public Order() {
+    }
+
+    public Order(int nomorPesanan, Calendar tanggalPesanan, Vehicle sewaan) {
+        this.nomorPesanan = nomorPesanan;
+        this.tanggalPesanan = tanggalPesanan;
         this.sewaan = sewaan;
-        this.tanggalPesanan = Calendar.getInstance();
-        this.nomorPesanan++;
-        listPesanan.add(this);
     }
 
     public void print() {
+        // Price Formats
+        DecimalFormatSymbols symbols = new DecimalFormatSymbols();
+        symbols.setGroupingSeparator('.');
+        symbols.setDecimalSeparator(',');
+        DecimalFormat df = new DecimalFormat("Rp #,###.00", symbols);
+
         listPesanan.forEach(pesanan -> {
             System.out.println("Nomor Pesanan: " + pesanan.nomorPesanan);
             System.out.println("Tanggal Pesanan: " + pesanan.tanggalPesanan.getTime());
             System.out.println("Model: " + pesanan.sewaan.getModel());
             System.out.println("Color: " + pesanan.sewaan.getColor());
-            System.out.println("Number Plate: " + pesanan.sewaan.getNumberPlate());
-            System.out.println("Capacity: " + pesanan.sewaan.getCapacity());
-            System.out.println("Price: " + pesanan.sewaan.getPrice());
+            System.out.println("Price: " + df.format(pesanan.sewaan.getPrice()));
             System.out.println();
         });
     }
 
-    public void cancel() {
-        listPesanan.remove(this);
+    public void printNota(int index) {
+        listNota.get(index).print();
+    }
+
+    public void cancel(int nomorPesanan) {
+        listPesanan.remove(nomorPesanan);
     }
 
     public void tambahPesanan(Vehicle sewaan) {
-        listPesanan.add(new Order(sewaan));
+        Calendar date = Calendar.getInstance();
+        int num = listPesanan.size() + 1;
+        Order pesanan = new Order(num, date, sewaan);
+        listPesanan.add(pesanan);
+    }
+
+    public void tambahNota(String[] tanggalSewa, int jam, double harga, String[] jamSewa, boolean isMember) {
+        Receipt nota = new Receipt(tanggalSewa, jam, harga, jamSewa, isMember);
+        listNota.add(nota);
     }
 }
 
@@ -42,7 +63,8 @@ class MainOrder {
         Vehicle mobil = new Mobil("Toyota Avanza", "Silver", "B 1234 XYZ", 7, 200000);
         Vehicle motor = new Motor("Honda Beat", "Black", "B 1234 XYZ", 2, 50000);
         Vehicle van = new Van("Toyota Hiace", "White", "B 1234 XYZ", 15, 500000);
-        Order pesanan1 = new Order(mobil);
+        Order pesanan1 = new Order();
+        pesanan1.tambahPesanan(mobil);
         pesanan1.tambahPesanan(van);
         pesanan1.tambahPesanan(motor);
         pesanan1.print();

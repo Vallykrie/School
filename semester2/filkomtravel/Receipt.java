@@ -13,6 +13,7 @@ public class Receipt {
     private int jam;
     private double harga;
     private static int nomorPesanan = 0;
+    private boolean isMember;
 
     /**
      * Constructs a Receipt object with the specified rental information.
@@ -22,11 +23,12 @@ public class Receipt {
      * @param harga       the price of the rental
      * @param jamSewa     the rental time in the format [hour, minute]
      */
-    Receipt(String[] tanggalSewa, int jam, double harga, String[] jamSewa) {
+    public Receipt(String[] tanggalSewa, int jam, double harga, String[] jamSewa, boolean isMember) {
         this.tanggalSewa = tanggalSewa;
         this.jam = jam;
         this.harga = harga;
         this.jamSewa = jamSewa;
+        this.isMember = isMember;
         nomorPesanan++;
     }
 
@@ -34,7 +36,7 @@ public class Receipt {
      * Prints the details of the rental transaction, including rental date,
      * duration, return date, and price.
      */
-    public void print(boolean isMember) {
+    public void print() {
 
         // Price Formats
         DecimalFormatSymbols symbols = new DecimalFormatSymbols();
