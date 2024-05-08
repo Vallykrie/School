@@ -34,7 +34,7 @@ public class Main {
 
         // Data User
         Guest guest = new Guest("guest", "guest", "guest", "guest");
-        Member admin = new Member("admin", "admin", "admin", "admin", "2000/01/01");
+        Guest admin = new Member("admin", "admin", "admin", "admin", "2000/01/01");
         LinkedList<Guest> userList = new LinkedList<>();
         userList.add(guest);
         userList.add(admin);
@@ -84,12 +84,21 @@ public class Main {
                     username = than.nextLine();
                     System.out.print("Email: ");
                     email = than.nextLine();
-                    System.out.print("Password: ");
-                    password = than.nextLine();
-                    System.out.print("Confirm Password: ");
-                    password = than.nextLine();
-                    Guest newUser = new Guest(username, password, email, namaLengkap);
-                    userList.add(newUser);
+                    boolean passwordDidntMatch = true;
+                    while (passwordDidntMatch) {
+                        System.out.print("Password: ");
+                        password = than.nextLine();
+                        System.out.print("Confirm Password: ");
+                        String confirmPassword = than.nextLine();
+                        if (password.equals(confirmPassword)) {
+                            Guest newUser = new Guest(username, password, email, namaLengkap);
+                            userList.add(newUser);
+                            passwordDidntMatch = false;
+                        } else {
+                            System.out.println("Confirm password harus sama!\n");
+
+                        }
+                    }
                     inMenu = false;
                     break;
                 case 3:
@@ -120,11 +129,11 @@ public class Main {
 
                 switch (pilih) {
                     case 1:
+                        Guest loggedIn = userList.get(indexLogin);
                         System.out.println(divider1);
                         System.out.println("// Profile Anda");
-                        Guest loggedIn = userList.get(indexLogin);
+                        loggedIn.viewProfile();
                         if (!(loggedIn.isMember())) {
-                            loggedIn.viewProfile();
                             System.out.println(divider1);
                             System.out.println(
                                     "Nampaknya anda belum menjadi member Filkom Travel\nAnda akan mendapatkan diskon 15% setiap transaksi \ndengan menjadi member.");

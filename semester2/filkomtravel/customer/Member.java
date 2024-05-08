@@ -25,6 +25,7 @@ public class Member extends Guest {
     public Member(String username, String password, String email, String namaLengkap, String tanggalLahir) {
         super(username, password, email, namaLengkap);
         setTanggalLahir(tanggalLahir);
+        setStartMember();
     }
 
     /**
