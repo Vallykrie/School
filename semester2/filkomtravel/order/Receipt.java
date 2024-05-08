@@ -13,7 +13,7 @@ public class Receipt {
     private String[] tanggalSewa, jamSewa;
     private int jam;
     private double harga;
-    private static int nomorNota = 0;
+    private int nomorNota = 0;
     private boolean isMember;
 
     /**
@@ -24,13 +24,13 @@ public class Receipt {
      * @param harga       the price of the rental
      * @param jamSewa     the rental time in the format [hour, minute]
      */
-    public Receipt(String[] tanggalSewa, int jam, double harga, String[] jamSewa, boolean isMember) {
+    public Receipt(String[] tanggalSewa, int jam, double harga, String[] jamSewa, boolean isMember, int nomorNota) {
         this.tanggalSewa = tanggalSewa;
         this.jam = jam;
         this.harga = harga;
         this.jamSewa = jamSewa;
         this.isMember = isMember;
-        nomorNota++;
+        this.nomorNota = nomorNota;
     }
 
     /**

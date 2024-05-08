@@ -9,7 +9,7 @@ import java.util.LinkedList;
 public class Order {
     private LinkedList<Order> listPesanan = new LinkedList<Order>();
     private LinkedList<Receipt> listNota = new LinkedList<Receipt>();
-    private int nomorPesanan = 0;
+    private int nomorPesanan = 0, nomorNota = 0;
     private Calendar tanggalPesanan;
     private Vehicle sewaan;
     private Status status;
@@ -40,7 +40,6 @@ public class Order {
             System.out.println("Tanggal Pesanan: " + pesanan.tanggalPesanan.getTime());
             System.out.println("Model: " + pesanan.sewaan.getModel());
             System.out.println("Color: " + pesanan.sewaan.getColor());
-            System.out.println("Price: " + df.format(pesanan.sewaan.getPrice()));
             System.out.println("Status: " + pesanan.status);
             System.out.println();
         });
@@ -70,7 +69,8 @@ public class Order {
     }
 
     public void tambahNota(String[] tanggalSewa, int jam, double harga, String[] jamSewa, boolean isMember) {
-        Receipt nota = new Receipt(tanggalSewa, jam, harga, jamSewa, isMember);
+        nomorNota++;
+        Receipt nota = new Receipt(tanggalSewa, jam, harga, jamSewa, isMember, nomorNota);
         listNota.add(nota);
     }
 
