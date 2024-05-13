@@ -1,174 +1,223 @@
-package ASD.Praktikum;
+// package Praktikum;
 
-import java.util.Scanner;
+class Node {
+    String username;
+    Node next;
 
-import ASD.UTP.NodeAVL;
-
-class NodeAVL {
-    String barang;
-    int data;
-    NodeAVL left, right;
-    int height;
-
-    NodeAVL(String barang, int data) {
-        this.barang = barang;
-        this.data = data;
-        height = 1;
-        left = right = null;
+    Node(String u) {
+        username = u;
+        next = null;
     }
 }
 
-class AVL {
-    NodeAVL root;
-    int nomorkurang = 0;
-    int nomorlebih = 0;
+class Graph {
+    Node[] vertices;
+    int size;
 
-    public int height(NodeAVL N) {
-        if (N == null) {
-            return 0;
-        }
-        return N.height;
+    Graph(int maxSize) {
+        vertices = new Node[maxSize];
+        size = 0;
     }
 
-    public NodeAVL rightRotate(NodeAVL y) {
-        NodeAVL x = y.left;
-        NodeAVL T2 = x.right;
-        // rotasi kanan
-        x.right = y;
-        y.left = T2;
-        // perbarui tinggi dari node
-        y.height = Math.max(height(y.left), height(y.right)) + 1;
-        x.height = Math.max(height(x.left), height(x.right)) + 1;
-        return x;
-    }
-
-    public int getBalance(NodeAVL N) {
-        if (N == null) {
-            return 0;
-        }
-        return height(N.left) - height(N.right);
-    }
-
-    public NodeAVL leftRotate(NodeAVL x) {
-        NodeAVL y = x.right;
-        NodeAVL T2 = y.left;
-        // rotasi kiri
-        y.left = x;
-        x.right = T2;
-        // perbarui tinggi dari node
-        x.height = Math.max(height(x.left), height(x.right)) + 1;
-        y.height = Math.max(height(y.left), height(y.right)) + 1;
-        return y;
-    }
-
-    public void add(String barang, int data) {
-        root = add(root, barang, data);
-    }
-
-    public NodeAVL add(NodeAVL node, String barang, int data) {
-        if (node == null) {
-            return (new NodeAVL(barang, data));
-        }
-        if (data < node.data) {
-            node.left = add(node.left, barang, data);
-        } else if (data > node.data) {
-            node.right = add(node.right, barang, data);
+    void insert(String username) {
+        if (find(username) == null) {
+            vertices[size++] = new Node(username);
+            System.out.println(username + " inserted");
         } else {
-            return node;
+            System.out.println(username + " already exists");
         }
-        node.height = 1 + Math.max(height(node.left), height(node.right));
-        int balance = getBalance(node);
-        // right rotation (left of left)
-        if (balance > 1 && data < node.left.data) {
-            return rightRotate(node);
-        }
-        // left rotation (right of right)
-        if (balance < -1 && data > node.right.data) {
-            return leftRotate(node);
-        }
-        // left-right rotation (right of left)
-        if (balance > 1 && data > node.left.data) {
-            node.left = leftRotate(node.left);
-            return rightRotate(node);
-        }
-        // right-left rotation (left of right)
-        if (balance < -1 && data < node.right.data) {
-            node.right = rightRotate(node.right);
-            return leftRotate(node);
-        }
-        return node;
     }
 
-    int nomorLebih = 1;
-    int nomorKurang = 1;
-
-    boolean search(NodeAVL root, String condition, int harga) {
-        if (root == null) {
-            return false;
+    void add(String username) {
+        if (find(username) == null) {
+            vertices[size++] = new Node(username);
+            // System.out.println(username + " inserted");
+        } else {
+            // System.out.println(username + " already exists");
         }
-        if (condition.equals("LEBIH DARI")) {
-            boolean found = false;
-            boolean leftFound = search(root.right, condition, harga);
-            if (root.data > harga) {
-                System.out.println(nomorLebih++ + ". " + root.barang + " = Rp" + root.data);
-                found = true;
-            }
-            boolean rightFound = search(root.left, condition, harga);
-            return found || leftFound || rightFound;
-        } else if (condition.equals("KURANG DARI")) {
-            boolean rightFound = search(root.right, condition, harga);
-            boolean found = false;
-            if (root.data < harga) {
-                System.out.println(nomorKurang++ + ". " + root.barang + " = Rp" + root.data);
-                found = true;
-            }
-            boolean leftFound = search(root.left, condition, harga);
+    }
 
-            return leftFound || found || rightFound;
-        } else if (condition.equals("SAMA DENGAN")) {
-            boolean leftFound = search(root.left, condition, harga);
-            boolean found = false;
-            if (root.data == harga) {
-                System.out.println(root.barang + " = Rp" + root.data);
-                found = true;
+    Node find(String username) {
+        for (int i = 0; i < size; i++) {
+            if (vertices[i].username.equals(username)) {
+                return vertices[i];
             }
-            boolean rightFound = search(root.right, condition, harga);
-            return leftFound || found || rightFound;
         }
-        return false;
+        return null;
+    }
+
+    void connect(String username1, String username2) {
+        Node user1 = find(username1);
+        Node user2 = find(username2);
+
+        if (user1 == null && user2 == null) {
+            System.out.println("username " + username1 + " and " + username2 + " not found");
+        } else if (user1 == null) {
+            System.out.println("username " + username1 + " not found");
+        } else if (user2 == null) {
+            System.out.println("username " + username2 + " not found");
+        } else {
+            Node temp = user2.next;
+            while (temp != null) {
+                if (temp.username.equals(username2)) {
+                    System.out.println("connection already exists between " + username1 + " and " + username2);
+                    return;
+                }
+                temp = temp.next;
+            }
+            Node newNode = new Node(username1);
+            newNode.next = user2.next;
+            user2.next = newNode;
+            System.out.println("connect " + username1 + " with " + username2 + " success");
+        }
+    }
+
+    void check(String username1, String username2) {
+        Node user1 = find(username1);
+        Node user2 = find(username2);
+
+        if (user1 == null && user2 == null) {
+            // System.out.println("username " + username1 + " and " + username2 + " not
+            // found");
+        } else if (user1 == null) {
+            // System.out.println("username " + username1 + " not found");
+        } else if (user2 == null) {
+            // System.out.println("username " + username2 + " not found");
+        } else {
+            Node temp = user1.next;
+            while (temp != null) {
+                if (temp.username.equals(username2)) {
+                    // System.out.println("Connection already exists between " + username1 + " and "
+                    // + username2);
+                    return;
+                }
+                temp = temp.next;
+            }
+            Node newNode = new Node(username2);
+            newNode.next = user1.next;
+            user1.next = newNode;
+            // System.out.println("Connect " + username1 + " with " + username2 + "
+            // success");
+        }
+    }
+
+    void mostFollowed() {
+        int maxFollowers = 0;
+        StringBuilder mostFollowedUsers = new StringBuilder();
+
+        for (int i = 0; i < size; i++) {
+            Node current = vertices[i].next;
+            int followers = 0;
+            while (current != null) {
+                followers++;
+                current = current.next;
+            }
+            if (followers > maxFollowers) {
+                maxFollowers = followers;
+                mostFollowedUsers = new StringBuilder(vertices[i].username);
+            } else if (followers == maxFollowers) {
+                mostFollowedUsers.append(", ").append(vertices[i].username);
+            }
+        }
+
+        if (maxFollowers == 0) {
+            System.out.println();
+        } else {
+            System.out.println(mostFollowedUsers + " with " + maxFollowers + " total followers");
+        }
+    }
+
+    void numGroups() {
+        boolean[] visited = new boolean[size];
+        int groups = 0;
+        for (int i = 0; i < size; i++) {
+            if (!visited[i]) {
+                dfs(i, visited);
+                groups++;
+            }
+        }
+        System.out.println("number of groups: " + groups);
+    }
+
+    void dfs(int index, boolean[] visited) {
+        visited[index] = true;
+        Node current = vertices[index].next;
+        while (current != null) {
+            int neighborIndex = findIndex(current.username);
+            if (!visited[neighborIndex]) {
+                dfs(neighborIndex, visited);
+            }
+            current = current.next;
+        }
+    }
+
+    int findIndex(String username) {
+        for (int i = 0; i < size; i++) {
+            if (vertices[i].username.equals(username)) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    int followersCount(String username) {
+        Node user = find(username);
+        if (user == null) {
+            return -1;
+        }
+
+        int followers = 0;
+        for (int i = 0; i < size; i++) {
+            Node current = vertices[i].next;
+            while (current != null) {
+                if (current.username.equals(username)) {
+                    followers++;
+                }
+                current = current.next;
+            }
+        }
+        return followers;
     }
 }
 
 public class Main {
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        int n = sc.nextInt();
-        sc.nextLine();
+        java.util.Scanner scanner = new java.util.Scanner(System.in);
+        int commands = scanner.nextInt();
+        scanner.nextLine();
 
-        AVL avl = new AVL();
-        while (n-- > 0) {
-            String command[] = sc.nextLine().split(" ");
-            switch (command[0]) {
-                case "TAMBAH":
-                    String barang[] = sc.nextLine().split(";");
-                    for (int i = 0; i < barang.length; i++) {
-                        String a[] = barang[i].split(",");
-                        avl.add(a[0], Integer.parseInt(a[1]));
-                    }
-                    System.out.println("Data " + barang.length + " barang berhasil ditambah\n");
+        Graph graph = new Graph(20);
+        Graph clone = new Graph(20);
+
+        for (int i = 0; i < commands; i++) {
+            String command = scanner.nextLine();
+            String[] parts = command.split(" ");
+
+            switch (parts[0]) {
+                case "insert":
+                    graph.insert(parts[1]);
+                    clone.add(parts[1]);
                     break;
-                case "CARI":
-                    String cari[] = sc.nextLine().split(" ");
-                    String condition = cari[0] + " " + cari[1];
-                    int harga = Integer.parseInt(cari[2]);
-                    if (!avl.search(avl.root, condition, harga)) {
-                        System.out.println("Data barang tidak ditemukan\n");
+                case "connect":
+                    graph.connect(parts[1], parts[2]);
+                    clone.check(parts[1], parts[2]);
+                    break;
+                case "mostfollowed":
+                    graph.mostFollowed();
+                    break;
+                case "numgroups":
+                    clone.numGroups();
+                    break;
+                case "followers":
+                    int followers = graph.followersCount(parts[1]);
+                    if (followers == -1) {
+                        System.out.println("username " + parts[1] + " not found");
                     } else {
-                        System.out.println();
+                        System.out.println(followers);
                     }
                     break;
                 default:
-                    break;
+                    System.out.println("Invalid command");
             }
         }
     }

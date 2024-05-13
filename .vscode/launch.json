@@ -3,6 +3,13 @@
   "configurations": [
     {
       "type": "java",
+      "name": "nathan_051_9_1",
+      "request": "launch",
+      "mainClass": "nathan_051_9_1",
+      "projectName": "School_e414736b"
+    },
+    {
+      "type": "java",
       "name": "MainAVLT",
       "request": "launch",
       "mainClass": "MainAVLT",
