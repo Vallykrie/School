@@ -1,3 +1,5 @@
+package Praktikum;
+
 import java.util.Arrays;
 
 public class nathan_051_9_1 {

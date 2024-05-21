@@ -2,6 +2,13 @@
   "version": "0.2.0",
   "configurations": [
     {
+      "type": "java",
+      "name": "loop",
+      "request": "launch",
+      "mainClass": "OOP.Praktikum.loop",
+      "projectName": "semester2_7bf34456"
+    },
+    {
       "name": "C/C++ Runner: Debug Session",
       "type": "cppdbg",
       "request": "launch",

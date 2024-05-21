@@ -1,224 +1,243 @@
-// package Praktikum;
-
-class Node {
-    String username;
-    Node next;
-
-    Node(String u) {
-        username = u;
-        next = null;
-    }
-}
-
-class Graph {
-    Node[] vertices;
-    int size;
-
-    Graph(int maxSize) {
-        vertices = new Node[maxSize];
-        size = 0;
-    }
-
-    void insert(String username) {
-        if (find(username) == null) {
-            vertices[size++] = new Node(username);
-            System.out.println(username + " inserted");
-        } else {
-            System.out.println(username + " already exists");
-        }
-    }
-
-    void add(String username) {
-        if (find(username) == null) {
-            vertices[size++] = new Node(username);
-            // System.out.println(username + " inserted");
-        } else {
-            // System.out.println(username + " already exists");
-        }
-    }
-
-    Node find(String username) {
-        for (int i = 0; i < size; i++) {
-            if (vertices[i].username.equals(username)) {
-                return vertices[i];
-            }
-        }
-        return null;
-    }
-
-    void connect(String username1, String username2) {
-        Node user1 = find(username1);
-        Node user2 = find(username2);
-
-        if (user1 == null && user2 == null) {
-            System.out.println("username " + username1 + " and " + username2 + " not found");
-        } else if (user1 == null) {
-            System.out.println("username " + username1 + " not found");
-        } else if (user2 == null) {
-            System.out.println("username " + username2 + " not found");
-        } else {
-            Node temp = user2.next;
-            while (temp != null) {
-                if (temp.username.equals(username2)) {
-                    System.out.println("connection already exists between " + username1 + " and " + username2);
-                    return;
-                }
-                temp = temp.next;
-            }
-            Node newNode = new Node(username1);
-            newNode.next = user2.next;
-            user2.next = newNode;
-            System.out.println("connect " + username1 + " with " + username2 + " success");
-        }
-    }
-
-    void check(String username1, String username2) {
-        Node user1 = find(username1);
-        Node user2 = find(username2);
-
-        if (user1 == null && user2 == null) {
-            // System.out.println("username " + username1 + " and " + username2 + " not
-            // found");
-        } else if (user1 == null) {
-            // System.out.println("username " + username1 + " not found");
-        } else if (user2 == null) {
-            // System.out.println("username " + username2 + " not found");
-        } else {
-            Node temp = user1.next;
-            while (temp != null) {
-                if (temp.username.equals(username2)) {
-                    // System.out.println("Connection already exists between " + username1 + " and "
-                    // + username2);
-                    return;
-                }
-                temp = temp.next;
-            }
-            Node newNode = new Node(username2);
-            newNode.next = user1.next;
-            user1.next = newNode;
-            // System.out.println("Connect " + username1 + " with " + username2 + "
-            // success");
-        }
-    }
-
-    void mostFollowed() {
-        int maxFollowers = 0;
-        StringBuilder mostFollowedUsers = new StringBuilder();
-
-        for (int i = 0; i < size; i++) {
-            Node current = vertices[i].next;
-            int followers = 0;
-            while (current != null) {
-                followers++;
-                current = current.next;
-            }
-            if (followers > maxFollowers) {
-                maxFollowers = followers;
-                mostFollowedUsers = new StringBuilder(vertices[i].username);
-            } else if (followers == maxFollowers) {
-                mostFollowedUsers.append(", ").append(vertices[i].username);
-            }
-        }
-
-        if (maxFollowers == 0) {
-            System.out.println();
-        } else {
-            System.out.println(mostFollowedUsers + " with " + maxFollowers + " total followers");
-        }
-    }
-
-    void numGroups() {
-        boolean[] visited = new boolean[size];
-        int groups = 0;
-        for (int i = 0; i < size; i++) {
-            if (!visited[i]) {
-                dfs(i, visited);
-                groups++;
-            }
-        }
-        System.out.println("number of groups: " + groups);
-    }
-
-    void dfs(int index, boolean[] visited) {
-        visited[index] = true;
-        Node current = vertices[index].next;
-        while (current != null) {
-            int neighborIndex = findIndex(current.username);
-            if (!visited[neighborIndex]) {
-                dfs(neighborIndex, visited);
-            }
-            current = current.next;
-        }
-    }
-
-    int findIndex(String username) {
-        for (int i = 0; i < size; i++) {
-            if (vertices[i].username.equals(username)) {
-                return i;
-            }
-        }
-        return -1;
-    }
-
-    int followersCount(String username) {
-        Node user = find(username);
-        if (user == null) {
-            return -1;
-        }
-
-        int followers = 0;
-        for (int i = 0; i < size; i++) {
-            Node current = vertices[i].next;
-            while (current != null) {
-                if (current.username.equals(username)) {
-                    followers++;
-                }
-                current = current.next;
-            }
-        }
-        return followers;
-    }
-}
-
-public class Main {
+/**
+ * This class represents a program that performs operations on groups of data.
+ * It includes methods for inserting data into different groups, finding top groups based on certain criteria,
+ * and sorting groups using the quicksort algorithm.
+ */
+public class nathan_051_10_2 {
+    /**
+     * The main method of the program.
+     * It reads input from the user, performs operations on groups of data, and prints the results.
+     *
+     * @param args The command-line arguments passed to the program (not used in this program).
+     */
     public static void main(String[] args) {
-        java.util.Scanner scanner = new java.util.Scanner(System.in);
-        int commands = scanner.nextInt();
-        scanner.nextLine();
+        java.util.Scanner than = new java.util.Scanner(System.in);
+        Group[] nodedata = new Group[150];
+        Group[] lingkungan = new Group[150];
+        Group[] kesehatan = new Group[150];
+        Group[] teknologi = new Group[150];
+        int index = 0;
+        int indexl = 0;
+        int indexk = 0;
+        int indext = 0;
 
-        Graph graph = new Graph(20);
-        Graph clone = new Graph(20);
+        int n = than.nextInt();
+        if (than.hasNextLine()) {
+            than.nextLine();
+        }
+        for (int i = 0; i < n; i++) {
+            String input = than.nextLine();
+            String[] inpuptBagi = input.split(" ");
+            if (inpuptBagi[0].equals("insert")) {
+                String[] dataEntries = than.nextLine().split(";");
+                for (String string : dataEntries) {
+                    String[] data = string.split(" ");
+                    String name = data[0];
+                    int presentation = Integer.parseInt(data[1]);
+                    int creativity = Integer.parseInt(data[2]);
+                    int discussion = Integer.parseInt(data[3]);
+                    int vote = Integer.parseInt(data[4]);
+                    String field = data[5];
+                    Group tmp = new Group(name, presentation, creativity, discussion, vote, field);
 
-        for (int i = 0; i < commands; i++) {
-            String command = scanner.nextLine();
-            String[] parts = command.split(" ");
-
-            switch (parts[0]) {
-                case "insert":
-                    graph.insert(parts[1]);
-                    clone.add(parts[1]);
-                    break;
-                case "connect":
-                    graph.connect(parts[1], parts[2]);
-                    clone.check(parts[1], parts[2]);
-                    break;
-                case "mostfollowed":
-                    graph.mostFollowed();
-                    break;
-                case "numgroups":
-                    clone.numGroups();
-                    break;
-                case "followers":
-                    int followers = graph.followersCount(parts[1]);
-                    if (followers == -1) {
-                        System.out.println("username " + parts[1] + " not found");
-                    } else {
-                        System.out.println(followers);
+                    nodedata[index++] = tmp;
+                    switch (field) {
+                        case "Lingkungan": lingkungan[indexl++] = tmp; break;
+                        case "Kesehatan": kesehatan[indexk++] = tmp; break;
+                        case "Teknologi": teknologi[indext++] = tmp; break;
                     }
-                    break;
-                default:
-                    System.out.println("Invalid command");
+                }
+                System.out.println("Berhasil memasukkan " + dataEntries.length + " data kelompok");
+
+            } else if (inpuptBagi[0].equals("find")) {
+                switch (inpuptBagi[1]) {
+                    case "umum": System.out.println("Juara umum:"); printTopGroups(nodedata, index, 5, "score"); break;
+                    case "favorit": System.out.println("Juara favorit:"); printTopGroups(nodedata, index, 2, "vote"); break;
+                    case "lingkungan": System.out.println("Juara lingkungan:"); printTopGroups(lingkungan, indexl, 3, "score"); break;
+                    case "kesehatan": System.out.println("Juara kesehatan:"); printTopGroups(kesehatan, indexk, 3, "score"); break;
+                    case "teknologi": System.out.println("Juara teknologi:"); printTopGroups(teknologi, indext, 3, "score"); break;
+                }
             }
         }
+    }
+
+    /**
+     * Prints the top groups based on a given criterion.
+     *
+     * @param arr       The array of groups to be sorted and printed.
+     * @param length    The length of the array.
+     * @param topN      The number of top groups to be printed.
+     * @param criterion The criterion used to determine the top groups (either "score" or "vote").
+     */
+    public static void printTopGroups(Group[] arr, int length, int topN, String criterion) {
+        if (length == 0) {
+            System.out.println();
+            return;
+        }
+
+        Group[] sortedArray = new Group[length];
+        System.arraycopy(arr, 0, sortedArray, 0, length);
+
+        switch (criterion) {
+            case "score": quickSort(sortedArray, 0, length - 1, "score"); break;
+            case "vote": quickSort(sortedArray, 0, length - 1, "vote"); break;
+        }
+
+        int n = Math.min(topN, length);
+        for (int i = 0; i < n; i++) {
+            Group node = sortedArray[i];
+            System.out.println((i + 1) + ". " + node.name + ": " + node.totalScore + ", " + node.vote);
+        }
+        System.out.println();
+    }
+
+    /**
+     * Partitions the array of groups based on a given criterion.
+     *
+     * @param arr       The array of groups to be partitioned.
+     * @param left      The left index of the partition.
+     * @param right     The right index of the partition.
+     * @param criterion The criterion used to determine the partition (either "score" or "vote").
+     * @return The index of the pivot element after partitioning.
+     */
+    public static int partition(Group[] arr, int left, int right, String criterion) {
+        Group pivot = arr[right];
+        int i = left - 1;
+
+        for (int j = left; j < right; j++) {
+            boolean condition = false;
+            switch (criterion) {
+                case "score": condition = arr[j].totalScore > pivot.totalScore; break;
+                case "vote": condition = arr[j].vote > pivot.vote; break;
+            }
+
+            if (condition) {
+                i++;
+                Group tmp = arr[i];
+                arr[i] = arr[j];
+                arr[j] = tmp;
+            }
+        }
+
+        Group tmp = arr[i + 1];
+        arr[i + 1] = arr[right];
+        arr[right] = tmp;
+
+        return i + 1;
+    }
+
+    /**
+     * Sorts the array of groups using the quicksort algorithm based on a given criterion.
+     *
+     * @param arr       The array of groups to be sorted.
+     * @param left      The left index of the array.
+     * @param right     The right index of the array.
+     * @param criterion The criterion used to determine the sorting order (either "score" or "vote").
+     */
+    public static void quickSort(Group[] arr, int left, int right, String criterion) {
+        if (left < right) {
+            int mid = partition(arr, left, right, criterion);
+            quickSort(arr, left, mid - 1, criterion);
+            quickSort(arr, mid + 1, right, criterion);
+        }
+    }
+}
+
+/**
+ * Represents a group with its name, field, presentation score, creativity score, discussion score, vote score, and total score.
+ */
+class Group {
+    String name;
+    String field;
+    int presentation;
+    int creativity;
+    int discussion;
+    int vote;
+    int totalScore;
+
+    /**
+     * Constructs a new Group object with the specified name, presentation score, creativity score, discussion score, vote score, and field.
+     * The total score is calculated based on the presentation, creativity, and discussion scores.
+     *
+     * @param name         the name of the group
+     * @param presentation the presentation score of the group
+     * @param creativity   the creativity score of the group
+     * @param discussion   the discussion score of the group
+     * @param vote         the vote score of the group
+     * @param field        the field of the group
+     */
+    public Group(String name, int presentation, int creativity, int discussion, int vote, String field) {
+        setName(name);
+        setPresentation(presentation);
+        setCreativity(creativity);
+        setDiscussion(discussion);
+        setVote(vote);
+        setField(field);
+        this.totalScore = (int) Math
+                .round((presentation * 20 / 100) + (creativity * 50 / 100) + (discussion * 30 / 100));
+    }
+
+    /**
+     * Sets the name of the group.
+     *
+     * @param name the name of the group
+     */
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    /**
+     * Sets the field of the group.
+     *
+     * @param field the field of the group
+     */
+    public void setField(String field) {
+        this.field = field;
+    }
+
+    /**
+     * Sets the presentation score of the group.
+     *
+     * @param presentation the presentation score of the group
+     */
+    public void setPresentation(int presentation) {
+        this.presentation = presentation;
+    }
+
+    /**
+     * Sets the creativity score of the group.
+     *
+     * @param creativity the creativity score of the group
+     */
+    public void setCreativity(int creativity) {
+        this.creativity = creativity;
+    }
+
+    /**
+     * Sets the discussion score of the group.
+     *
+     * @param discussion the discussion score of the group
+     */
+    public void setDiscussion(int discussion) {
+        this.discussion = discussion;
+    }
+
+    /**
+     * Sets the vote score of the group.
+     *
+     * @param vote the vote score of the group
+     */
+    public void setVote(int vote) {
+        this.vote = vote;
+    }
+
+    /**
+     * Returns a string representation of the group, including the name, total score, and vote score.
+     *
+     * @return a string representation of the group
+     */
+    @Override
+    public String toString() {
+        return name + ": " + totalScore + ", " + vote;
     }
 }
