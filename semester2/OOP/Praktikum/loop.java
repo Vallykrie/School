@@ -1,7 +1,7 @@
 public class loop {
     public static void main(String[] args) {
         // untuk membantu mengetik tabel praktikum
-        int jumlah = 100;
+        int jumlah = 50;
         int i = 0;
         while (jumlah-- > 0) {
             i++;
